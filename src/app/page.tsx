@@ -258,7 +258,6 @@ export default function HomePage() {
   const [isBarcodeModalOpen, setIsBarcodeModalOpen] = useState(false)
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false)
   const [isQRISModalOpen, setIsQRISModalOpen] = useState(false)
-  const [showFloatingBarcode, setShowFloatingBarcode] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState<any>(null)
   const [orders, setOrders] = useState<any[]>([])
   const [qrisData, setQrisData] = useState<any>(null)
@@ -1593,32 +1592,17 @@ export default function HomePage() {
                   >
                     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                       <Button
-                        onClick={() => setShowFloatingBarcode(!showFloatingBarcode)}
+                        onClick={() => setIsBarcodeModalOpen(true)}
                         className="h-9 w-9 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-orange-300"
                       >
-                        <AnimatePresence mode="wait">
-                          {showFloatingBarcode ? (
-                            <motion.div
-                              key="close"
-                              initial={{ rotate: -90, opacity: 0 }}
-                              animate={{ rotate: 0, opacity: 1 }}
-                              exit={{ rotate: 90, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                            >
-                              <XCircle className="h-4 w-4 text-red-600" />
-                            </motion.div>
-                          ) : (
-                            <motion.div
-                              key="barcode"
-                              initial={{ rotate: 90, opacity: 0 }}
-                              animate={{ rotate: 0, opacity: 1 }}
-                              exit={{ rotate: -90, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                            >
-                              <QrCode className="h-4 w-4 text-red-600" />
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                        <motion.div
+                          initial={{ rotate: 90, opacity: 0 }}
+                          animate={{ rotate: 0, opacity: 1 }}
+                          exit={{ rotate: -90, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <QrCode className="h-4 w-4 text-red-600" />
+                        </motion.div>
                       </Button>
                     </motion.div>
                   </motion.div>
