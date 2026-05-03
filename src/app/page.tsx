@@ -50,6 +50,8 @@ import {
   Cookie,
   LayoutDashboard,
   Crown,
+  Sparkles,
+  Info,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -2440,123 +2442,166 @@ export default function HomePage() {
                   </Card>
                 </motion.div>
 
-                {/* Dynamic Sections */}
+                {/* Dynamic Sections - Modern Design 2025 */}
                 {selectedAccountSection === 'vouchers' && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
+                    className="space-y-4"
                   >
-                    <Card className="shadow-lg border-orange-200">
-                      <CardHeader className="bg-gradient-to-r from-orange-50 to-red-50">
-                        <CardTitle className="flex items-center gap-2">
-                          <Gift className="h-5 w-5 text-red-600" />
-                          <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent font-bold">
-                            Voucher Diskon
-                          </span>
+                    {/* Discount Vouchers */}
+                    <Card className="border-none shadow-xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white pb-6">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-3">
+                            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                              <Gift className="h-6 w-6" />
+                            </div>
+                            <div>
+                              <span className="text-xl font-bold">Voucher Diskon</span>
+                              <p className="text-xs text-white/80 font-normal mt-0.5">Hemat lebih banyak dengan voucher</p>
+                            </div>
+                          </CardTitle>
+                          <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                            <Sparkles className="h-4 w-4" />
+                            <span className="text-xs font-bold">{vouchers.length} Tersedia</span>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-4">
+                        {vouchers.length > 0 ? (
+                          <div className="grid gap-3">
+                            {vouchers.map((voucher: any, index: number) => (
+                              <motion.div
+                                key={voucher.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.08 }}
+                                className="relative overflow-hidden rounded-2xl border-2 border-orange-200 bg-gradient-to-r from-orange-50 via-red-50 to-orange-100 hover:shadow-lg transition-all group"
+                              >
+                                {/* Decorative Elements */}
+                                <div className="absolute top-0 left-0 w-16 h-16 bg-orange-500/10 rounded-full -translate-y-1/2 -translate-x-1/2"></div>
+                                <div className="absolute bottom-0 right-0 w-12 h-12 bg-red-500/10 rounded-full translate-y-1/2 translate-x-1/2"></div>
+
+                                <div className="flex items-center gap-4 p-4">
+                                  {/* Discount Badge */}
+                                  <div className="flex-shrink-0">
+                                    <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex flex-col items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                      <span className="text-2xl font-bold text-white">
+                                        {voucher.discountType === 'percentage' ? `${voucher.discountValue}%` : `${(voucher.discountValue / 1000).toFixed(0)}K`}
+                                      </span>
+                                      <span className="text-[10px] text-white/80 font-medium">OFF</span>
+                                    </div>
+                                  </div>
+
+                                  {/* Voucher Info */}
+                                  <div className="flex-1 min-w-0">
+                                    <h6 className="font-bold text-gray-800 text-base mb-1 truncate">{voucher.name}</h6>
+                                    <p className="text-sm text-gray-600 mb-2 line-clamp-2">{voucher.description}</p>
+                                    <div className="flex flex-wrap gap-2">
+                                      <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-[10px] font-bold px-2.5 py-1">
+                                        Min. Rp {voucher.minPurchase.toLocaleString()}
+                                      </Badge>
+                                      {voucher.expiresAt && (
+                                        <Badge variant="outline" className="text-[10px] border-orange-300 text-orange-600">
+                                          {new Date(voucher.expiresAt).toLocaleDateString('id-ID')}
+                                        </Badge>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  {/* Use Button */}
+                                  <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => handleUseVoucher(voucher.code)}
+                                    className="flex-shrink-0 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg transition-all"
+                                  >
+                                    Pakai
+                                  </motion.button>
+                                </div>
+
+                                {/* Shimmer Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="text-center py-12 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl border-2 border-dashed border-orange-200">
+                            <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <Gift className="h-10 w-10 text-orange-400" />
+                            </div>
+                            <p className="text-gray-600 font-semibold text-base mb-1">Belum ada voucher tersedia</p>
+                            <p className="text-sm text-gray-500">Belanja untuk mendapatkan voucher menarik!</p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+
+                    {/* Point Vouchers */}
+                    <Card className="border-none shadow-xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-yellow-400 to-orange-400 pb-6">
+                        <CardTitle className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                            <Star className="h-6 w-6" />
+                          </div>
+                          <div>
+                            <span className="text-xl font-bold text-gray-800">Voucher Poin</span>
+                            <p className="text-xs text-gray-700 font-normal mt-0.5">Tukarkan poin Anda</p>
+                          </div>
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-6 pt-6">
-                        {/* Available Vouchers */}
-                        <div>
-                          <h5 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                            Voucher Tersedia
-                          </h5>
-                          {vouchers.length > 0 ? (
-                            <div className="space-y-4">
-                              {vouchers.map((voucher: any, index: number) => (
-                                <motion.div
-                                  key={voucher.id}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.1 }}
-                                  className="border-2 border-dashed border-orange-300 rounded-xl p-5 bg-gradient-to-r from-orange-50 via-red-50 to-orange-100 hover:shadow-lg transition-all relative overflow-hidden"
-                                >
-                                  {/* Coupon Left Edge */}
-                                  <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-orange-200 to-transparent"></div>
-                                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-orange-300 rounded-full"></div>
-
-                                  <div className="flex items-start justify-between gap-4 pl-8">
-                                    <div className="flex-1">
-                                      <h6 className="font-bold text-lg text-gray-800 mb-1">{voucher.name}</h6>
-                                      <p className="text-sm text-gray-600 mb-3">{voucher.description}</p>
-                                      <div className="flex gap-2 flex-wrap">
-                                        <Badge className="px-3 py-1 bg-red-600 text-white text-xs font-bold">
-                                          {voucher.discountType === 'percentage' ? `${voucher.discountValue}% OFF` : `Rp ${voucher.discountValue.toLocaleString()} OFF`}
-                                        </Badge>
-                                        <Badge variant="outline" className="text-xs border-orange-300">
-                                          Min. Rp {voucher.minPurchase.toLocaleString()}
-                                        </Badge>
-                                      </div>
-                                    </div>
-                                    <Button
-                                      className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-lg"
-                                      onClick={() => handleUseVoucher(voucher.code)}
-                                    >
-                                      Pakai
-                                    </Button>
-                                  </div>
-                                </motion.div>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className="text-center py-10 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl">
-                              <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Gift className="h-10 w-10 text-orange-400" />
-                              </div>
-                              <p className="text-gray-600 font-medium">Belum ada voucher tersedia</p>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Point Vouchers */}
-                        <div>
-                          <h5 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                            Voucher Poin
-                          </h5>
-                          {pointVouchers.length > 0 ? (
-                            <div className="space-y-4">
-                              {pointVouchers.map((pv: any, index: number) => (
-                                <motion.div
-                                  key={pv.id}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.1 }}
-                                  className="border-2 border-yellow-300 rounded-xl p-5 bg-gradient-to-r from-yellow-50 to-orange-100 hover:shadow-lg transition-all"
-                                >
-                                  <div className="flex items-start justify-between gap-4">
-                                    <div className="flex-1">
-                                      <div className="flex items-center gap-2 mb-2">
-                                        <Badge className="bg-green-500 text-white px-3 py-1 text-xs font-bold">
-                                          Produk Gratis
-                                        </Badge>
-                                        <Badge variant="outline" className="text-xs border-yellow-300">
-                                          {pv.pointsRequired} Poin
-                                        </Badge>
-                                      </div>
-                                      <p className="text-sm text-gray-600">
-                                        Tukarkan voucher ini untuk mendapatkan produk gratis!
-                                      </p>
-                                    </div>
-                                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                                      <CheckCircle className="h-5 w-5 text-white" />
+                      <CardContent className="p-4">
+                        {pointVouchers.length > 0 ? (
+                          <div className="grid gap-3">
+                            {pointVouchers.map((pv: any, index: number) => (
+                              <motion.div
+                                key={pv.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.08 }}
+                                className="relative overflow-hidden rounded-2xl border-2 border-yellow-300 bg-gradient-to-r from-yellow-50 to-orange-50 hover:shadow-lg transition-all"
+                              >
+                                <div className="flex items-center gap-4 p-4">
+                                  {/* Points Badge */}
+                                  <div className="flex-shrink-0">
+                                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl flex flex-col items-center justify-center shadow-lg">
+                                      <span className="text-xl font-bold text-white">{pv.pointsRequired}</span>
+                                      <span className="text-[10px] text-white/80 font-medium">Poin</span>
                                     </div>
                                   </div>
-                                </motion.div>
-                              ))}
+
+                                  {/* Voucher Info */}
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-[10px] font-bold px-2.5 py-1">
+                                        Produk Gratis
+                                      </Badge>
+                                      {pv.stock && (
+                                        <Badge variant="outline" className="text-[10px] border-yellow-300 text-yellow-700">
+                                          Stok: {pv.stock}
+                                        </Badge>
+                                      )}
+                                    </div>
+                                    <p className="text-sm text-gray-700 font-medium">Tukarkan poin untuk mendapatkan produk gratis!</p>
+                                  </div>
+
+                                  {/* Arrow */}
+                                  <ArrowRight className="h-5 w-5 text-yellow-500 flex-shrink-0" />
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="text-center py-12 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl border-2 border-dashed border-yellow-300">
+                            <div className="w-20 h-20 bg-gradient-to-br from-yellow-100 to-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <Star className="h-10 w-10 text-yellow-400" />
                             </div>
-                          ) : (
-                            <div className="text-center py-10 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl">
-                              <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Star className="h-10 w-10 text-yellow-400" />
-                              </div>
-                              <p className="text-gray-600 font-medium mb-2">Belum ada voucher poin</p>
-                              <p className="text-sm text-gray-500">Tukarkan poin di menu Tukar Poin</p>
-                            </div>
-                          )}
-                        </div>
+                            <p className="text-gray-600 font-semibold text-base mb-1">Belum ada voucher poin</p>
+                            <p className="text-sm text-gray-500">Kumpulkan poin dari pembelian Anda!</p>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -2568,73 +2613,96 @@ export default function HomePage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <Card className="shadow-lg border-purple-200">
-                      <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
-                        <CardTitle className="flex items-center gap-2">
-                          <Bell className="h-5 w-5 text-purple-600" />
-                          <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
-                            Notifikasi
-                          </span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="pt-6">
-                        <div className="space-y-4">
-                          {/* Promo Special */}
-                          <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-200 hover:shadow-md transition-all"
-                          >
-                            <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                              <Percent className="h-6 w-6 text-white" />
+                    <Card className="border-none shadow-xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white pb-6">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-3">
+                            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                              <Bell className="h-6 w-6" />
                             </div>
-                            <div className="flex-1">
+                            <div>
+                              <span className="text-xl font-bold">Notifikasi</span>
+                              <p className="text-xs text-white/80 font-normal mt-0.5">Info terbaru untuk Anda</p>
+                            </div>
+                          </CardTitle>
+                          <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                            <span className="text-xs font-bold">3 Baru</span>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-4 space-y-3">
+                        {/* Promo Notification */}
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="relative overflow-hidden rounded-2xl border-2 border-red-200 bg-gradient-to-r from-red-50 to-orange-50 hover:shadow-lg transition-all group"
+                        >
+                          <div className="absolute top-0 left-0 w-8 h-8 bg-red-500/10 rounded-full -translate-y-1/2 -translate-x-1/2"></div>
+                          <div className="flex items-start gap-4 p-4">
+                            <div className="flex-shrink-0">
+                              <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <Percent className="h-7 w-7 text-white" />
+                              </div>
+                            </div>
+                            <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <h6 className="font-bold text-gray-800">Promo Spesial</h6>
-                                <Badge className="bg-red-500 text-white text-xs">Baru</Badge>
+                                <Badge className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5">Baru</Badge>
                               </div>
-                              <p className="text-sm text-gray-600">Diskon hingga 17% untuk semua produk</p>
+                              <p className="text-sm text-gray-600">Diskon hingga 17% untuk semua produk belanjaan</p>
+                              <p className="text-xs text-gray-400 mt-2">Baru saja</p>
                             </div>
-                          </motion.div>
+                          </div>
+                        </motion.div>
 
-                          {/* Order Completed */}
-                          <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 hover:shadow-md transition-all"
-                          >
-                            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                              <CheckCircle className="h-6 w-6 text-white" />
+                        {/* Order Completed Notification */}
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 }}
+                          className="relative overflow-hidden rounded-2xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 hover:shadow-lg transition-all"
+                        >
+                          <div className="flex items-start gap-4 p-4">
+                            <div className="flex-shrink-0">
+                              <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg">
+                                <CheckCircle className="h-7 w-7 text-white" />
+                              </div>
                             </div>
-                            <div className="flex-1">
+                            <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <h6 className="font-bold text-gray-800">Order Selesai</h6>
-                                <Badge className="bg-green-500 text-white text-xs">Info</Badge>
+                                <Badge variant="outline" className="border-green-300 text-green-600 text-[10px] font-bold px-2 py-0.5">Info</Badge>
                               </div>
-                              <p className="text-sm text-gray-600">Order Anda telah selesai diproses</p>
+                              <p className="text-sm text-gray-600">Order #ORD-12345 telah selesai diproses</p>
+                              <p className="text-xs text-gray-400 mt-2">5 menit yang lalu</p>
                             </div>
-                          </motion.div>
+                          </div>
+                        </motion.div>
 
-                          {/* Points Added */}
-                          <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-200 hover:shadow-md transition-all"
-                          >
-                            <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                              <Star className="h-6 w-6 text-white" />
+                        {/* Points Added Notification */}
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                          className="relative overflow-hidden rounded-2xl border-2 border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50 hover:shadow-lg transition-all"
+                        >
+                          <div className="flex items-start gap-4 p-4">
+                            <div className="flex-shrink-0">
+                              <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
+                                <Star className="h-7 w-7 text-white" />
+                              </div>
                             </div>
-                            <div className="flex-1">
+                            <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <h6 className="font-bold text-gray-800">Poin Bertambah</h6>
-                                <Badge className="bg-yellow-500 text-white text-xs">Reward</Badge>
+                                <Badge className="bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-0.5">Reward</Badge>
                               </div>
-                              <p className="text-sm text-gray-600">Anda mendapat 100 poin dari pembelian</p>
+                              <p className="text-sm text-gray-600">Anda mendapat 100 poin dari pembelian Rp 50.000</p>
+                              <p className="text-xs text-gray-400 mt-2">10 menit yang lalu</p>
                             </div>
-                          </motion.div>
-                        </div>
+                          </div>
+                        </motion.div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -2645,135 +2713,168 @@ export default function HomePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
+                    className="space-y-4"
                   >
-                    <Card className="shadow-lg border-blue-200">
-                      <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
-                        <CardTitle className="flex items-center gap-2">
-                          <Lock className="h-5 w-5 text-blue-600" />
-                          <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold">
-                            Keamanan & Privasi
-                          </span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-3 pt-6">
-                        {/* Security Options */}
-                        <div className="space-y-3">
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setIsForgotPasswordOpen(true)}
-                            className="w-full flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 hover:shadow-md transition-all text-left"
-                          >
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                              <Lock className="h-6 w-6 text-white" />
+                    {/* Security Options */}
+                    <Card className="border-none shadow-xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white pb-6">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="flex items-center gap-3">
+                            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                              <Shield className="h-6 w-6" />
                             </div>
-                            <div className="flex-1">
-                              <h6 className="font-bold text-gray-800 mb-1">Ganti Password</h6>
+                            <div>
+                              <span className="text-xl font-bold">Keamanan</span>
+                              <p className="text-xs text-white/80 font-normal mt-0.5">Lindungi akun Anda</p>
+                            </div>
+                          </CardTitle>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-4 space-y-3">
+                        {/* Change Password */}
+                        <motion.button
+                          whileHover={{ scale: 1.02, x: 4 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setIsForgotPasswordOpen(true)}
+                          className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all text-left p-4"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="relative flex items-center gap-4">
+                            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                              <Lock className="h-7 w-7 text-white" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h6 className="font-bold text-gray-800 text-base">Ganti Password</h6>
                               <p className="text-sm text-gray-600">Ubah password akun Anda</p>
                             </div>
-                            <ArrowRight className="h-5 w-5 text-blue-400" />
-                          </motion.button>
+                            <ArrowRight className="h-5 w-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </motion.button>
 
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => {
-                              setEmailUpdateData({ newEmail: user?.email || '', currentPassword: '' })
-                              setIsEmailModalOpen(true)
-                            }}
-                            className="w-full flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 hover:shadow-md transition-all text-left"
-                          >
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                              <Mail className="h-6 w-6 text-white" />
+                        {/* Change Email */}
+                        <motion.button
+                          whileHover={{ scale: 1.02, x: 4 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            setEmailUpdateData({ newEmail: user?.email || '', currentPassword: '' })
+                            setIsEmailModalOpen(true)
+                          }}
+                          className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all text-left p-4"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="relative flex items-center gap-4">
+                            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                              <Mail className="h-7 w-7 text-white" />
                             </div>
-                            <div className="flex-1">
-                              <h6 className="font-bold text-gray-800 mb-1">Ubah Email</h6>
+                            <div className="flex-1 min-w-0">
+                              <h6 className="font-bold text-gray-800 text-base">Ubah Email</h6>
                               <p className="text-sm text-gray-600">Update email akun Anda</p>
                             </div>
-                            <ArrowRight className="h-5 w-5 text-blue-400" />
-                          </motion.button>
+                            <ArrowRight className="h-5 w-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </motion.button>
 
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => {
-                              setPhoneUpdateData({ newPhone: user?.phone || '', currentPassword: '' })
-                              setIsPhoneModalOpen(true)
-                            }}
-                            className="w-full flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 hover:shadow-md transition-all text-left"
-                          >
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                              <Phone className="h-6 w-6 text-white" />
+                        {/* Change Phone */}
+                        <motion.button
+                          whileHover={{ scale: 1.02, x: 4 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            setPhoneUpdateData({ newPhone: user?.phone || '', currentPassword: '' })
+                            setIsPhoneModalOpen(true)
+                          }}
+                          className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all text-left p-4"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="relative flex items-center gap-4">
+                            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                              <Phone className="h-7 w-7 text-white" />
                             </div>
-                            <div className="flex-1">
-                              <h6 className="font-bold text-gray-800 mb-1">Ubah Nomor Telepon</h6>
+                            <div className="flex-1 min-w-0">
+                              <h6 className="font-bold text-gray-800 text-base">Ubah Nomor Telepon</h6>
                               <p className="text-sm text-gray-600">Update nomor telepon akun Anda</p>
                             </div>
-                            <ArrowRight className="h-5 w-5 text-blue-400" />
-                          </motion.button>
+                            <ArrowRight className="h-5 w-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </motion.button>
 
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => {
-                              setAddressUpdateData({ newAddress: user?.address || '', currentPassword: '' })
-                              setIsUpdateAddressModal(true)
-                            }}
-                            className="w-full flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 hover:shadow-md transition-all text-left"
-                          >
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                              <MapPin className="h-6 w-6 text-white" />
+                        {/* Change Address */}
+                        <motion.button
+                          whileHover={{ scale: 1.02, x: 4 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            setAddressUpdateData({ newAddress: user?.address || '', currentPassword: '' })
+                            setIsUpdateAddressModal(true)
+                          }}
+                          className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all text-left p-4"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="relative flex items-center gap-4">
+                            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                              <MapPin className="h-7 w-7 text-white" />
                             </div>
-                            <div className="flex-1">
-                              <h6 className="font-bold text-gray-800 mb-1">Ubah Alamat</h6>
+                            <div className="flex-1 min-w-0">
+                              <h6 className="font-bold text-gray-800 text-base">Ubah Alamat</h6>
                               <p className="text-sm text-gray-600">Update alamat pengiriman Anda</p>
                             </div>
-                            <ArrowRight className="h-5 w-5 text-blue-400" />
-                          </motion.button>
-                        </div>
+                            <ArrowRight className="h-5 w-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </motion.button>
+                      </CardContent>
+                    </Card>
 
-                        <Separator className="my-6" />
-
-                        {/* Privacy Policy */}
-                        <div>
-                          <h6 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                            Kebijakan & Privasi
-                          </h6>
-                          <div className="space-y-3">
-                            <motion.button
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => setIsTermsModalOpen(true)}
-                              className="w-full flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 hover:shadow-md transition-all text-left"
-                            >
-                              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                                <FileText className="h-6 w-6 text-white" />
-                              </div>
-                              <div className="flex-1">
-                                <h6 className="font-bold text-gray-800 mb-1">Syarat & Ketentuan</h6>
-                                <p className="text-sm text-gray-600">Baca syarat dan ketentuan penggunaan</p>
-                              </div>
-                              <ArrowRight className="h-5 w-5 text-purple-400" />
-                            </motion.button>
-
-                            <motion.button
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => setIsPrivacyModalOpen(true)}
-                              className="w-full flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 hover:shadow-md transition-all text-left"
-                            >
-                              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                                <Shield className="h-6 w-6 text-white" />
-                              </div>
-                              <div className="flex-1">
-                                <h6 className="font-bold text-gray-800 mb-1">Kebijakan Privasi</h6>
-                                <p className="text-sm text-gray-600">Pelajari bagaimana kami melindungi data Anda</p>
-                              </div>
-                              <ArrowRight className="h-5 w-5 text-purple-400" />
-                            </motion.button>
+                    {/* Privacy Policy */}
+                    <Card className="border-none shadow-xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white pb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                            <FileText className="h-6 w-6" />
+                          </div>
+                          <div>
+                            <span className="text-xl font-bold">Kebijakan & Privasi</span>
+                            <p className="text-xs text-white/80 font-normal mt-0.5">Baca aturan kami</p>
                           </div>
                         </div>
+                      </CardHeader>
+                      <CardContent className="p-4 space-y-3">
+                        {/* Terms & Conditions */}
+                        <motion.button
+                          whileHover={{ scale: 1.02, x: 4 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setIsTermsModalOpen(true)}
+                          className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all text-left p-4"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="relative flex items-center gap-4">
+                            <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                              <FileText className="h-7 w-7 text-white" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h6 className="font-bold text-gray-800 text-base">Syarat & Ketentuan</h6>
+                              <p className="text-sm text-gray-600">Baca syarat dan ketentuan penggunaan</p>
+                            </div>
+                            <ArrowRight className="h-5 w-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </motion.button>
+
+                        {/* Privacy Policy */}
+                        <motion.button
+                          whileHover={{ scale: 1.02, x: 4 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setIsPrivacyModalOpen(true)}
+                          className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all text-left p-4"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="relative flex items-center gap-4">
+                            <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                              <Shield className="h-7 w-7 text-white" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h6 className="font-bold text-gray-800 text-base">Kebijakan Privasi</h6>
+                              <p className="text-sm text-gray-600">Pelajari bagaimana kami melindungi data Anda</p>
+                            </div>
+                            <ArrowRight className="h-5 w-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </motion.button>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -2784,26 +2885,31 @@ export default function HomePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
+                    className="space-y-4"
                   >
-                    <Card className="shadow-lg border-gray-200">
-                      <CardHeader className="bg-gradient-to-r from-gray-50 to-slate-50">
-                        <CardTitle className="flex items-center gap-2">
-                          <Settings className="h-5 w-5 text-gray-600" />
-                          <span className="bg-gradient-to-r from-gray-600 to-slate-600 bg-clip-text text-transparent font-bold">
-                            Pengaturan
-                          </span>
-                        </CardTitle>
+                    {/* App Settings */}
+                    <Card className="border-none shadow-xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-gray-700 to-slate-800 text-white pb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                            <Settings className="h-6 w-6" />
+                          </div>
+                          <div>
+                            <span className="text-xl font-bold">Pengaturan</span>
+                            <p className="text-xs text-white/80 font-normal mt-0.5">Sesuaikan preferensi</p>
+                          </div>
+                        </div>
                       </CardHeader>
-                      <CardContent className="space-y-6 pt-6">
+                      <CardContent className="p-4 space-y-4">
                         {/* Theme Selection */}
-                        <div className="p-5 rounded-xl bg-gradient-to-r from-gray-50 to-slate-50 border border-gray-200">
-                          <h6 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <div className="p-4 rounded-2xl bg-gradient-to-r from-gray-50 to-slate-50 border-2 border-gray-200">
+                          <h6 className="font-bold text-gray-800 text-base mb-4 flex items-center gap-2">
                             <span className="w-2 h-2 bg-gray-500 rounded-full"></span>
                             Tema Aplikasi
                           </h6>
                           <div className="grid grid-cols-2 gap-4">
                             <motion.button
-                              whileHover={{ scale: 1.05 }}
+                              whileHover={{ scale: 1.05, y: -3 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
                                 if (user) {
@@ -2819,19 +2925,17 @@ export default function HomePage() {
                                   })
                                 }
                               }}
-                              className={`relative overflow-hidden p-5 rounded-xl border-2 transition-all ${
+                              className={`relative overflow-hidden p-5 rounded-2xl border-2 transition-all ${
                                 (user as any).theme === 'light'
                                   ? 'bg-gradient-to-br from-yellow-100 to-amber-100 border-yellow-400 shadow-xl'
-                                  : 'bg-white border-gray-200 hover:shadow-md'
+                                  : 'bg-white border-gray-200 hover:shadow-md hover:border-yellow-300'
                               }`}
                             >
-                              <div className="absolute top-3 right-3">
-                                {(user as any).theme === 'light' && (
-                                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                                    <CheckCircle className="h-4 w-4 text-white" />
-                                  </div>
-                                )}
-                              </div>
+                              {(user as any).theme === 'light' && (
+                                <div className="absolute top-3 right-3 w-7 h-7 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                                  <CheckCircle className="h-4 w-4 text-white" />
+                                </div>
+                              )}
                               <div className="flex flex-col items-center gap-3">
                                 <div className="w-16 h-16 bg-gradient-to-br from-yellow-300 to-amber-400 rounded-full flex items-center justify-center shadow-lg">
                                   <span className="text-3xl">☀️</span>
@@ -2841,7 +2945,7 @@ export default function HomePage() {
                             </motion.button>
 
                             <motion.button
-                              whileHover={{ scale: 1.05 }}
+                              whileHover={{ scale: 1.05, y: -3 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
                                 if (user) {
@@ -2857,19 +2961,17 @@ export default function HomePage() {
                                   })
                                 }
                               }}
-                              className={`relative overflow-hidden p-5 rounded-xl border-2 transition-all ${
+                              className={`relative overflow-hidden p-5 rounded-2xl border-2 transition-all ${
                                 (user as any).theme === 'dark'
-                                  ? 'bg-gradient-to-br from-gray-700 to-slate-800 border-gray-500 shadow-xl'
-                                  : 'bg-white border-gray-200 hover:shadow-md'
+                                  ? 'bg-gradient-to-br from-gray-700 to-slate-800 border-gray-600 shadow-xl'
+                                  : 'bg-white border-gray-200 hover:shadow-md hover:border-gray-500'
                               }`}
                             >
-                              <div className="absolute top-3 right-3">
-                                {(user as any).theme === 'dark' && (
-                                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                                    <CheckCircle className="h-4 w-4 text-white" />
-                                  </div>
-                                )}
-                              </div>
+                              {(user as any).theme === 'dark' && (
+                                <div className="absolute top-3 right-3 w-7 h-7 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                                  <CheckCircle className="h-4 w-4 text-white" />
+                                </div>
+                              )}
                               <div className="flex flex-col items-center gap-3">
                                 <div className="w-16 h-16 bg-gradient-to-br from-gray-600 to-slate-700 rounded-full flex items-center justify-center shadow-lg">
                                   <span className="text-3xl">🌙</span>
@@ -2881,8 +2983,8 @@ export default function HomePage() {
                         </div>
 
                         {/* Notification Sound */}
-                        <div className="p-5 rounded-xl bg-gradient-to-r from-gray-50 to-slate-50 border border-gray-200">
-                          <h6 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <div className="p-4 rounded-2xl bg-gradient-to-r from-gray-50 to-slate-50 border-2 border-gray-200">
+                          <h6 className="font-bold text-gray-800 text-base mb-4 flex items-center gap-2">
                             <span className="w-2 h-2 bg-gray-500 rounded-full"></span>
                             Nada Notifikasi
                           </h6>
@@ -2890,7 +2992,10 @@ export default function HomePage() {
                             {['default', 'chime', 'silent'].map((sound, index) => (
                               <motion.button
                                 key={sound}
-                                whileHover={{ scale: 1.02 }}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                whileHover={{ scale: 1.02, x: 4 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => {
                                   if (sound !== 'silent') playNotificationSound(sound)
@@ -2907,68 +3012,75 @@ export default function HomePage() {
                                     })
                                   }
                                 }}
-                                className={`relative flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+                                className={`w-full group relative overflow-hidden rounded-2xl border-2 transition-all text-left p-4 ${
                                   (user as any).notificationSound === sound
                                     ? 'bg-gradient-to-r from-red-500 to-orange-500 border-red-500 shadow-xl'
-                                    : 'bg-white border-gray-200 hover:shadow-md'
+                                    : 'bg-white border-gray-200 hover:shadow-md hover:border-orange-300'
                                 }`}
                               >
-                                <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                                  <span className="text-2xl">
-                                    {sound === 'default' ? '🔔' : sound === 'chime' ? '🎵' : '🔕'}
-                                  </span>
-                                </div>
-                                <div className="flex-1">
-                                  <h6 className={`font-bold mb-1 ${(user as any).notificationSound === sound ? 'text-white' : 'text-gray-800'}`}>
-                                    {sound === 'default' ? 'Default' : sound === 'chime' ? 'Chime' : 'Silent'}
-                                  </h6>
-                                  <p className={`text-sm ${(user as any).notificationSound === sound ? 'text-white/80' : 'text-gray-600'}`}>
-                                    {sound === 'default' ? 'Suara notifikasi standar' : sound === 'chime' ? 'Tiga nada musik yang menyenangkan' : 'Tanpa suara notifikasi'}
-                                  </p>
-                                </div>
                                 {(user as any).notificationSound === sound && (
-                                  <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                                    <CheckCircle className="h-5 w-5 text-green-500" />
+                                  <div className="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-lg">
+                                    <CheckCircle className="h-4 w-4 text-green-500" />
                                   </div>
                                 )}
-                                {sound !== 'silent' && (user as any).notificationSound !== sound && (
-                                  <div
-                                    onClick={(e) => {
-                                      e.stopPropagation()
-                                      playNotificationSound(sound)
-                                    }}
-                                    className="h-8 w-8 rounded-full hover:bg-black/5 flex items-center justify-center cursor-pointer transition-colors"
-                                  >
-                                    <Volume2 className={`h-4 w-4 ${(user as any).notificationSound === sound ? 'text-white' : 'text-gray-400'}`} />
+                                <div className="flex items-center gap-4">
+                                  <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg flex-shrink-0 bg-gradient-to-br from-gray-100 to-gray-200">
+                                    <span className="text-2xl">
+                                      {sound === 'default' ? '🔔' : sound === 'chime' ? '🎵' : '🔕'}
+                                    </span>
                                   </div>
-                                )}
+                                  <div className="flex-1">
+                                    <h6 className={`font-bold text-base mb-1 ${(user as any).notificationSound === sound ? 'text-white' : 'text-gray-800'}`}>
+                                      {sound === 'default' ? 'Default' : sound === 'chime' ? 'Chime' : 'Silent'}
+                                    </h6>
+                                    <p className={`text-sm ${(user as any).notificationSound === sound ? 'text-white/80' : 'text-gray-600'}`}>
+                                      {sound === 'default' ? 'Suara notifikasi standar' : sound === 'chime' ? 'Tiga nada musik yang menyenangkan' : 'Tanpa suara notifikasi'}
+                                    </p>
+                                  </div>
+                                  {sound !== 'silent' && (
+                                    <div
+                                      onClick={(e) => {
+                                        e.stopPropagation()
+                                        playNotificationSound(sound)
+                                      }}
+                                      className={`h-10 w-10 rounded-full flex items-center justify-center cursor-pointer transition-colors ${(user as any).notificationSound === sound ? 'hover:bg-white/20' : 'hover:bg-gray-100'}`}
+                                    >
+                                      <Volume2 className={`h-5 w-5 ${(user as any).notificationSound === sound ? 'text-white' : 'text-gray-400'}`} />
+                                    </div>
+                                  )}
+                                </div>
                               </motion.button>
                             ))}
                           </div>
                         </div>
+                      </CardContent>
+                    </Card>
 
-                        <Separator />
-
-                        {/* App Info */}
-                        <div className="p-5 rounded-xl bg-gradient-to-r from-gray-50 to-slate-50 border border-gray-200">
-                          <h6 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-gray-500 rounded-full"></span>
-                            Tentang Aplikasi
-                          </h6>
-                          <div className="space-y-3 text-sm">
-                            <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
-                              <span className="text-gray-600">Versi Aplikasi</span>
-                              <span className="font-bold text-gray-800">1.0.0</span>
-                            </div>
-                            <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
-                              <span className="text-gray-600">Terakhir Update</span>
-                              <span className="font-bold text-gray-800">Januari 2025</span>
-                            </div>
-                            <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
-                              <span className="text-gray-600">Platform</span>
-                              <span className="font-bold text-gray-800">Next.js 16</span>
-                            </div>
+                    {/* App Info */}
+                    <Card className="border-none shadow-xl overflow-hidden">
+                      <CardHeader className="bg-gradient-to-r from-gray-600 to-slate-700 text-white pb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                            <Info className="h-6 w-6" />
                           </div>
+                          <div>
+                            <span className="text-xl font-bold">Tentang Aplikasi</span>
+                            <p className="text-xs text-white/80 font-normal mt-0.5">Informasi aplikasi</p>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-gray-50 to-slate-50 border-2 border-gray-200">
+                          <span className="text-gray-600 font-medium">Versi Aplikasi</span>
+                          <span className="font-bold text-gray-800 text-lg">2.0.0</span>
+                        </div>
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-gray-50 to-slate-50 border-2 border-gray-200">
+                          <span className="text-gray-600 font-medium">Terakhir Update</span>
+                          <span className="font-bold text-gray-800">Januari 2025</span>
+                        </div>
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-gray-50 to-slate-50 border-2 border-gray-200">
+                          <span className="text-gray-600 font-medium">Platform</span>
+                          <span className="font-bold text-gray-800">Next.js 16</span>
                         </div>
                       </CardContent>
                     </Card>
