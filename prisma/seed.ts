@@ -218,6 +218,50 @@ async function main() {
     })
   }
 
+  // Create users
+  const bcrypt = await import('bcryptjs')
+
+  await prisma.user.upsert({
+    where: { email: 'admin@ayamgeprek.com' },
+    update: {},
+    create: {
+      email: 'admin@ayamgeprek.com',
+      name: 'Admin',
+      password: await bcrypt.hash('admin123', 10),
+      role: 'admin',
+      memberLevel: 'Crazy Rich',
+      points: 10000,
+    },
+  })
+
+  await prisma.user.upsert({
+    where: { email: 'deaflud@ayamgeprek.com' },
+    update: {},
+    create: {
+      email: 'deaflud@ayamgeprek.com',
+      name: 'Deaflud',
+      password: await bcrypt.hash('admin123', 10),
+      role: 'admin',
+      memberLevel: 'Crazy Rich',
+      points: 10000,
+    },
+  })
+
+  await prisma.user.upsert({
+    where: { email: 'customer@gmail.com' },
+    update: {},
+    create: {
+      email: 'customer@gmail.com',
+      name: 'Customer',
+      phone: '08123456789',
+      address: 'Jl. Contoh No. 123',
+      password: await bcrypt.hash('user123', 10),
+      role: 'customer',
+      memberLevel: 'Silver',
+      points: 500,
+    },
+  })
+
   console.log('Database seeded successfully!')
 }
 
