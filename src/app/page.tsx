@@ -4988,8 +4988,8 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Middle Section: Barcode - Centered */}
-                  <div className="relative flex items-center justify-center">
+                  {/* Middle Section: Barcode - Slightly Left */}
+                  <div className="relative flex items-center justify-start pr-20">
                     <motion.div
                       animate={{ scale: [1, 1.02, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
