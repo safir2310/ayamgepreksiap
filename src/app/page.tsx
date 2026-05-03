@@ -1577,22 +1577,6 @@ export default function HomePage() {
 
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-3 py-4 pb-20 sm:px-4 sm:py-6">
-        {/* Page Header - Dynamic Title Based on Tab */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-6"
-        >
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-            {currentTab === 'home' && 'Beranda'}
-            {currentTab === 'products' && 'Belanja'}
-            {currentTab === 'orders' && 'Riwayat Pesanan'}
-            {currentTab === 'redeem' && 'Tukar Poin'}
-            {currentTab === 'account' && 'Akun'}
-          </h1>
-        </motion.div>
-
         {/* Notification Banner - Show on all pages */}
         <AnimatePresence>
           {showNotificationBanner && hasNotifications && (
