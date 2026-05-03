@@ -4464,15 +4464,15 @@ export default function HomePage() {
       </Dialog>
 
       <Dialog open={isBarcodeModalOpen} onOpenChange={setIsBarcodeModalOpen}>
-        <DialogContent className="sm:max-w-[420px] p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-[340px] p-0 overflow-hidden">
           {/* Premium Gradient Background */}
-          <div className="relative bg-gradient-to-br from-red-600 via-orange-500 to-amber-500 min-h-[500px]">
+          <div className="relative bg-gradient-to-br from-red-600 via-orange-500 to-amber-500 p-4">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
 
             {/* Content */}
-            <div className="relative z-10 p-6 space-y-6">
+            <div className="relative z-10 space-y-4">
               {/* Header */}
               <div className="text-center">
                 <motion.div
@@ -4480,11 +4480,11 @@ export default function HomePage() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl mb-4 shadow-2xl">
-                    <CreditCard className="h-8 w-8 text-white" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl mb-2 shadow-xl">
+                    <CreditCard className="h-6 w-6 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold text-white mb-2 tracking-wide">KARTU MEMBER</h2>
-                  <p className="text-white/80 text-sm">Scan barcode untuk poin Anda</p>
+                  <h2 className="text-xl font-bold text-white mb-1 tracking-wide">KARTU MEMBER</h2>
+                  <p className="text-white/80 text-xs">Scan barcode untuk poin</p>
                 </motion.div>
               </div>
 
@@ -4495,29 +4495,29 @@ export default function HomePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-white/95 backdrop-blur-xl rounded-2xl p-5 shadow-2xl border border-white/30"
+                    className="bg-white/95 backdrop-blur-xl rounded-xl p-4 shadow-2xl border border-white/30"
                   >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-                        <User className="h-6 w-6 text-white" />
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center shadow">
+                        <User className="h-5 w-5 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-gray-800 text-lg">{user.name || 'Pelanggan'}</h3>
-                        <p className="text-sm text-gray-500">{user.memberLevel} Member</p>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-gray-800 text-sm truncate">{user.name || 'Pelanggan'}</h3>
+                        <p className="text-xs text-gray-500">{user.memberLevel} Member</p>
                       </div>
-                      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold tracking-wider">
+                      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-2 py-1 rounded text-[10px] font-bold tracking-wider">
                         {user.id.slice(0, 8).toUpperCase()}
                       </div>
                     </div>
 
                     {/* Barcode Section */}
-                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 shadow-inner">
-                      <div className="flex justify-center mb-4">
-                        <div className="bg-white p-4 rounded-xl shadow-md">
+                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-3 shadow-inner">
+                      <div className="flex justify-center mb-2">
+                        <div className="bg-white p-2 rounded-lg shadow-sm">
                           <Barcode
                             value={user.phone || user.id}
-                            width={3}
-                            height={90}
+                            width={2.5}
+                            height={60}
                             displayValue={false}
                             background="white"
                             lineColor="#1F2937"
@@ -4525,60 +4525,55 @@ export default function HomePage() {
                           />
                         </div>
                       </div>
-                      <div className="text-center space-y-1">
-                        <p className="text-2xl font-bold text-gray-800 tracking-widest">{user.phone || user.id}</p>
-                        <p className="text-xs text-gray-500 font-medium">ID: {user.id.slice(0, 8).toUpperCase()}</p>
+                      <div className="text-center space-y-0.5">
+                        <p className="text-lg font-bold text-gray-800 tracking-widest text-xs">{user.phone || user.id}</p>
+                        <p className="text-[10px] text-gray-500 font-medium">ID: {user.id.slice(0, 8).toUpperCase()}</p>
                       </div>
                     </div>
 
                     {/* Stats Row */}
-                    <div className="grid grid-cols-3 gap-3 mt-4">
+                    <div className="grid grid-cols-3 gap-2 mt-3">
                       <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-3 text-center border-2 border-red-100"
+                        className="bg-gradient-to-br from-red-50 to-orange-50 rounded-lg p-2 text-center border border-red-100"
                       >
-                        <div className="text-lg mb-1">💳</div>
-                        <div className="text-2xl font-bold text-red-600">{user.points}</div>
-                        <div className="text-[10px] text-gray-600 font-medium">Poin</div>
+                        <div className="text-sm mb-0.5">💳</div>
+                        <div className="text-lg font-bold text-red-600">{user.points}</div>
+                        <div className="text-[9px] text-gray-600 font-medium">Poin</div>
                       </motion.div>
                       <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.25 }}
-                        className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-3 text-center border-2 border-amber-100"
+                        className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-lg p-2 text-center border border-amber-100"
                       >
-                        <div className="text-lg mb-1">🎯</div>
-                        <div className="text-2xl font-bold text-amber-600">{user.stampCount}</div>
-                        <div className="text-[10px] text-gray-600 font-medium">Stamp</div>
+                        <div className="text-sm mb-0.5">🎯</div>
+                        <div className="text-lg font-bold text-amber-600">{user.stampCount}</div>
+                        <div className="text-[9px] text-gray-600 font-medium">Stamp</div>
                       </motion.div>
                       <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.3 }}
-                        className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-3 text-center border-2 border-yellow-100"
+                        className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg p-2 text-center border border-yellow-100"
                       >
-                        <div className="text-lg mb-1">⭐</div>
-                        <div className="text-2xl font-bold text-yellow-600">{user.starCount}</div>
-                        <div className="text-[10px] text-gray-600 font-medium">Star</div>
+                        <div className="text-sm mb-0.5">⭐</div>
+                        <div className="text-lg font-bold text-yellow-600">{user.starCount}</div>
+                        <div className="text-[9px] text-gray-600 font-medium">Star</div>
                       </motion.div>
                     </div>
                   </motion.div>
 
-                  {/* Info Banner */}
+                  {/* Info Banner - Compact */}
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.35 }}
-                    className="bg-white/20 backdrop-blur-md rounded-xl p-4 text-center border border-white/20"
+                    className="bg-white/20 backdrop-blur-md rounded-lg p-2 text-center border border-white/20"
                   >
-                    <div className="flex items-center justify-center gap-2 text-white">
-                      <div className="w-8 h-8 rounded-lg bg-white/30 flex items-center justify-center">
-                        <FileText className="h-4 w-4 text-white" />
-                      </div>
-                      <p className="text-sm font-medium">Scan barcode ini saat checkout untuk mendapatkan poin otomatis</p>
-                    </div>
+                    <p className="text-[10px] text-white font-medium">Scan barcode saat checkout untuk poin otomatis</p>
                   </motion.div>
                 </>
               )}
