@@ -1638,7 +1638,22 @@ export default function HomePage() {
                     {user ? (
                       <>
                         {/* Premium Header */}
-                        <div className="flex items-start justify-end">
+                        <div className="flex items-start justify-between">
+                          <div className="relative">
+                            <motion.div
+                              animate={{ rotate: [-2, 2, -2] }}
+                              transition={{ duration: 4, repeat: Infinity }}
+                              className="flex items-center gap-2"
+                            >
+                              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center shadow-lg">
+                                <Crown className="h-4 w-4 text-white" />
+                              </div>
+                              <div>
+                                <h3 className="font-bold text-xs tracking-widest text-yellow-300 uppercase">Premium</h3>
+                                <p className="text-[9px] text-white/60 tracking-wide">{user.memberLevel} MEMBER</p>
+                              </div>
+                            </motion.div>
+                          </div>
                           <div className="relative">
                             <div className="relative bg-white/10 backdrop-blur-md rounded-lg px-3 py-1.5 border border-white/20">
                               <p className="text-white text-[10px] font-mono tracking-wider">{user.id.slice(0, 8).toUpperCase()}</p>
