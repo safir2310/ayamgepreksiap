@@ -2978,17 +2978,15 @@ export default function HomePage() {
                                   </div>
                                 )}
                                 {sound !== 'silent' && (user as any).notificationSound !== sound && (
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
+                                  <div
                                     onClick={(e) => {
                                       e.stopPropagation()
                                       playNotificationSound(sound)
                                     }}
-                                    className="h-8 w-8 p-0"
+                                    className="h-8 w-8 rounded-full hover:bg-black/5 flex items-center justify-center cursor-pointer transition-colors"
                                   >
                                     <Volume2 className={`h-4 w-4 ${(user as any).notificationSound === sound ? 'text-white' : 'text-gray-400'}`} />
-                                  </Button>
+                                  </div>
                                 )}
                               </motion.button>
                             ))}
