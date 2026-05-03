@@ -1481,7 +1481,7 @@ export default function HomePage() {
                   className="flex items-center gap-1.5 text-white/90 text-[10px] sm:text-[10px] hover:text-white transition-colors cursor-pointer text-left"
                 >
                   <MapPin className="h-2.5 w-2.5 sm:h-2.5 sm:w-2.5 flex-shrink-0" />
-                  <span className="truncate max-w-[100px] sm:max-w-[150px]">Jl. Medan - Banda Aceh, Simpang Camat, Gampong Tijue, 24151</span>
+                  <span className="truncate max-w-[140px] sm:max-w-[140px]">Jl. Medan - Banda Aceh, Simpang Camat, Gampong Tijue, 24151</span>
                 </button>
               </div>
             </div>
