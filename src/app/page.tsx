@@ -4916,7 +4916,7 @@ export default function HomePage() {
       </Dialog>
 
       <Dialog open={isBarcodeModalOpen} onOpenChange={setIsBarcodeModalOpen}>
-        <DialogContent className="sm:max-w-[360px] p-0 overflow-hidden bg-transparent border-0 shadow-2xl">
+        <DialogContent className="sm:max-w-[400px] p-6 overflow-hidden bg-transparent border-0 shadow-2xl">
           {/* Premium Member Card Barcode */}
           <div className="relative overflow-hidden mx-auto" style={{ width: '340px', height: '214px', borderRadius: '20px' }}>
             {/* Animated Gradient Background - Same as Member Card */}
@@ -4988,8 +4988,8 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Middle Section: Barcode */}
-                  <div className="relative">
+                  {/* Middle Section: Barcode - Centered */}
+                  <div className="relative flex items-center justify-center">
                     <motion.div
                       animate={{ scale: [1, 1.02, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
@@ -5000,7 +5000,7 @@ export default function HomePage() {
                         <Barcode
                           value={user.phone || user.id}
                           width={1.8}
-                          height={55}
+                          height={50}
                           displayValue={false}
                           background="white"
                           lineColor="#1F2937"
@@ -5072,12 +5072,12 @@ export default function HomePage() {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent via-white/5 to-transparent pointer-events-none"></div>
           </div>
 
-          {/* Close Button */}
+          {/* Neat Close Button */}
           <button
             onClick={() => setIsBarcodeModalOpen(false)}
-            className="absolute -top-3 -right-3 z-50 w-9 h-9 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 flex items-center justify-center transition-all shadow-lg shadow-orange-500/50 border-2 border-white"
+            className="absolute top-2 right-2 z-50 w-8 h-8 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-all shadow-md hover:shadow-lg"
           >
-            <X className="h-5 w-5 text-white" />
+            <X className="h-4 w-4 text-gray-700" />
           </button>
         </DialogContent>
       </Dialog>
