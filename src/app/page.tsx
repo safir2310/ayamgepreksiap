@@ -1912,52 +1912,140 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             {/* Categories */}
             <div className="bg-gradient-to-br from-red-50 via-orange-50 to-white shadow-sm mb-6">
-              <ScrollArea className="w-full">
-                <div className="flex gap-3 py-3 px-3">
-                  {categories.map((category) => {
-                    const getCategoryIcon = () => {
-                      const iconSize = selectedCategory === category.id ? 20 : 18
-                      switch (category.icon) {
-                        case 'shopping-bag': return <ShoppingBag size={iconSize} />
-                        case 'utensils-crossed': return <UtensilsCrossed size={iconSize} />
-                        case 'coffee': return <Coffee size={iconSize} />
-                        case 'cookie': return <Cookie size={iconSize} />
-                        case 'flame': return <Flame size={iconSize} />
-                        case 'home': return <Home size={iconSize} />
-                        default: return <ShoppingBag size={iconSize} />
-                      }
-                    }
-
-                    return (
-                      <motion.button
-                        key={category.id}
-                        whileHover={{ scale: 1.08 }}
-                        whileTap={{ scale: 0.92 }}
-                        onClick={() => setSelectedCategory(category.id)}
-                        className={`flex flex-col items-center gap-2 p-3 sm:p-3.5 rounded-2xl min-w-[75px] sm:min-w-[80px] transition-all relative overflow-hidden group ${
-                          selectedCategory === category.id
-                            ? `bg-gradient-to-br ${category.color} text-white shadow-xl ring-2 ring-offset-2 ring-white`
-                            : 'bg-white text-gray-700 shadow-md hover:shadow-xl hover:ring-2 hover:ring-offset-1 hover:ring-red-200'
-                        }`}
-                      >
-                        {/* Icon Container */}
-                        <div className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center transition-all ${
-                          selectedCategory === category.id
-                            ? 'bg-white/20'
-                            : `bg-gradient-to-br ${category.color} text-white group-hover:scale-110`
-                        }`}>
-                          {getCategoryIcon()}
-                        </div>
-                        <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">{category.name}</span>
-                        {/* Shine Effect */}
-                        {selectedCategory === category.id && (
-                          <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer" />
-                        )}
-                      </motion.button>
-                    )
-                  })}
+              {/* Category View Mode Toggle */}
+              <div className="flex items-center justify-between px-3 py-2 border-b border-red-100/50">
+                <div className="flex items-center gap-2">
+                  <Tag className="h-4 w-4 text-red-600" />
+                  <span className="text-sm font-semibold text-gray-700">Kategori</span>
                 </div>
-              </ScrollArea>
+                <div className="flex items-center gap-1 bg-white rounded-lg p-1 shadow-sm">
+                  <button
+                    onClick={() => setCategoryViewMode('horizontal')}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 ${
+                      categoryViewMode === 'horizontal'
+                        ? 'bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-md'
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    <LayoutDashboard className="h-3.5 w-3.5" />
+                    <span>Horizontal</span>
+                  </button>
+                  <button
+                    onClick={() => setCategoryViewMode('vertical')}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 ${
+                      categoryViewMode === 'vertical'
+                        ? 'bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-md'
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Sidebar className="h-3.5 w-3.5" />
+                    <span>Vertical</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Categories Container */}
+              {categoryViewMode === 'horizontal' ? (
+                /* Horizontal Scroll Mode */
+                <ScrollArea className="w-full">
+                  <div className="flex gap-3 py-3 px-3">
+                    {categories.map((category) => {
+                      const getCategoryIcon = () => {
+                        const iconSize = selectedCategory === category.id ? 20 : 18
+                        switch (category.icon) {
+                          case 'shopping-bag': return <ShoppingBag size={iconSize} />
+                          case 'utensils-crossed': return <UtensilsCrossed size={iconSize} />
+                          case 'coffee': return <Coffee size={iconSize} />
+                          case 'cookie': return <Cookie size={iconSize} />
+                          case 'flame': return <Flame size={iconSize} />
+                          case 'home': return <Home size={iconSize} />
+                          default: return <ShoppingBag size={iconSize} />
+                        }
+                      }
+
+                      return (
+                        <motion.button
+                          key={category.id}
+                          whileHover={{ scale: 1.08 }}
+                          whileTap={{ scale: 0.92 }}
+                          onClick={() => setSelectedCategory(category.id)}
+                          className={`flex flex-col items-center gap-2 p-3 sm:p-3.5 rounded-2xl min-w-[75px] sm:min-w-[80px] transition-all relative overflow-hidden group ${
+                            selectedCategory === category.id
+                              ? `bg-gradient-to-br ${category.color} text-white shadow-xl ring-2 ring-offset-2 ring-white`
+                              : 'bg-white text-gray-700 shadow-md hover:shadow-xl hover:ring-2 hover:ring-offset-1 hover:ring-red-200'
+                          }`}
+                        >
+                          {/* Icon Container */}
+                          <div className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center transition-all ${
+                            selectedCategory === category.id
+                              ? 'bg-white/20'
+                              : `bg-gradient-to-br ${category.color} text-white group-hover:scale-110`
+                          }`}>
+                            {getCategoryIcon()}
+                          </div>
+                          <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">{category.name}</span>
+                          {/* Shine Effect */}
+                          {selectedCategory === category.id && (
+                            <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer" />
+                          )}
+                        </motion.button>
+                      )
+                    })}
+                  </div>
+                </ScrollArea>
+              ) : (
+                /* Vertical Sidebar Mode */
+                <div className="py-3 px-3">
+                  <div className="flex flex-col gap-2">
+                    {categories.map((category) => {
+                      const getCategoryIcon = () => {
+                        const iconSize = selectedCategory === category.id ? 20 : 18
+                        switch (category.icon) {
+                          case 'shopping-bag': return <ShoppingBag size={iconSize} />
+                          case 'utensils-crossed': return <UtensilsCrossed size={iconSize} />
+                          case 'coffee': return <Coffee size={iconSize} />
+                          case 'cookie': return <Cookie size={iconSize} />
+                          case 'flame': return <Flame size={iconSize} />
+                          case 'home': return <Home size={iconSize} />
+                          default: return <ShoppingBag size={iconSize} />
+                        }
+                      }
+
+                      return (
+                        <motion.button
+                          key={category.id}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setSelectedCategory(category.id)}
+                          className={`flex items-center gap-3 p-2.5 sm:p-3 rounded-xl transition-all relative overflow-hidden group ${
+                            selectedCategory === category.id
+                              ? `bg-gradient-to-br ${category.color} text-white shadow-md ring-2 ring-offset-2 ring-white`
+                              : 'bg-white text-gray-700 shadow-sm hover:shadow-md hover:ring-2 hover:ring-offset-1 hover:ring-red-200'
+                          }`}
+                        >
+                          {/* Icon Container */}
+                          <div className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center transition-all flex-shrink-0 ${
+                            selectedCategory === category.id
+                              ? 'bg-white/20'
+                              : `bg-gradient-to-br ${category.color} text-white group-hover:scale-110`
+                          }`}>
+                            {getCategoryIcon()}
+                          </div>
+                          <span className="text-sm font-semibold text-left flex-1">{category.name}</span>
+                          {/* Shine Effect */}
+                          {selectedCategory === category.id && (
+                            <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer" />
+                          )}
+                          {/* Active Indicator */}
+                          {selectedCategory === category.id && (
+                            <div className="absolute right-2 w-1.5 h-1.5 bg-white rounded-full shadow-sm" />
+                          )}
+                        </motion.button>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
