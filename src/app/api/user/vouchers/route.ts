@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     const pointVouchers = await db.pointVoucher.findMany({
       where: {
         userId,
-        isUsed: false
+        active: true
       }
     })
 
@@ -51,6 +51,8 @@ export async function GET(request: NextRequest) {
         pointsRequired: pv.pointsRequired,
         productId: pv.productId,
         productImage: pv.productImage,
+        productName: pv.productName,
+        active: pv.active,
         isUsed: pv.isUsed,
         usedOrderId: pv.usedOrderId,
         createdAt: pv.createdAt

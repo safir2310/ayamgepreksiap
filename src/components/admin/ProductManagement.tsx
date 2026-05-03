@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Plus, Edit, Trash2, Package, X, Save, Upload, X as XIcon, Image as ImageIcon, Percent } from 'lucide-react'
+import { Search, Plus, Edit, Trash2, Package, X, Save, Upload, X as XIcon, Image as ImageIcon, Percent, Star, Gift } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -24,6 +24,11 @@ interface Product {
   discountPercent?: number
 }
 
+interface PointVoucherData {
+  pointsRequired: number
+  order: number
+}
+
 export function ProductManagement() {
   const [products, setProducts] = useState<Product[]>([])
   const [searchQuery, setSearchQuery] = useState('')
@@ -42,6 +47,14 @@ export function ProductManagement() {
     image: '',
     isPromo: false,
     promoPrice: ''
+  })
+  
+  // Point voucher modal state
+  const [isPointVoucherModalOpen, setIsPointVoucherModalOpen] = useState(false)
+  const [selectedProductForPoints, setSelectedProductForPoints] = useState<Product | null>(null)
+  const [pointVoucherData, setPointVoucherData] = useState<PointVoucherData>({
+    pointsRequired: 0,
+    order: 0
   })
 
   const categories = ['all', 'makanan', 'minuman', 'snack', 'lainnya']
@@ -65,10 +78,6 @@ export function ProductManagement() {
 
   useEffect(() => {
     setIsMounted(true)
-    loadProducts()
-  }, [])
-
-  useEffect(() => {
     loadProducts()
   }, [])
 
@@ -134,6 +143,60 @@ export function ProductManagement() {
     } catch (error) {
       console.error('Error deleting product:', error)
       toast.error('Gagal menghapus produk')
+    }
+  }
+
+  // Open point voucher modal
+  const handleConvertToPointVoucher = (product: Product) => {
+    setSelectedProductForPoints(product)
+    setPointVoucherData({
+      pointsRequired: Math.ceil(product.price / 100), // 100 Rupiah = 1 Point
+      order: 0
+    })
+    setIsPointVoucherModalOpen(true)
+  }
+
+  // Save point voucher
+  const handleSavePointVoucher = async () => {
+    if (!selectedProductForPoints) return
+    
+    if (pointVoucherData.pointsRequired <= 0) {
+      toast.error('Poin harus lebih dari 0')
+      return
+    }
+
+    try {
+      const res = await fetch('/api/admin/point-vouchers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: selectedProductForPoints.name,
+          description: `Tukar poin untuk ${selectedProductForPoints.name}. ${selectedProductForPoints.description || ''}`,
+          pointsRequired: pointVoucherData.pointsRequired,
+          productId: selectedProductForPoints.id,
+          productName: selectedProductForPoints.name,
+          productImage: selectedProductForPoints.image,
+          order: pointVoucherData.order,
+          active: true
+        })
+      })
+
+      if (res.ok) {
+        const data = await res.json()
+        if (data.success) {
+          toast.success('✅ Produk berhasil ditambahkan sebagai tukar poin!')
+          setIsPointVoucherModalOpen(false)
+          setSelectedProductForPoints(null)
+          setPointVoucherData({ pointsRequired: 0, order: 0 })
+        } else {
+          toast.error(data.error || 'Gagal membuat tukar poin')
+        }
+      } else {
+        toast.error('Gagal membuat tukar poin')
+      }
+    } catch (error) {
+      console.error('Error saving point voucher:', error)
+      toast.error('Gagal membuat tukar poin')
     }
   }
 
@@ -390,6 +453,15 @@ export function ProductManagement() {
                     <Button
                       variant="outline"
                       size="sm"
+                      className="flex-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-yellow-600 hover:from-yellow-600 hover:to-orange-600"
+                      onClick={() => handleConvertToPointVoucher(product)}
+                    >
+                      <Star className="h-4 w-4 mr-1" />
+                      Tukar Poin
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
                       className="flex-1 text-red-600 hover:bg-red-50"
                       onClick={() => handleDelete(product.id)}
                     >
@@ -564,6 +636,129 @@ export function ProductManagement() {
               </Button>
             </div>
           </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Point Voucher Modal */}
+      <Dialog open={isPointVoucherModalOpen} onOpenChange={setIsPointVoucherModalOpen}>
+        <DialogContent className="max-w-md p-0 overflow-hidden">
+          <div className="bg-gradient-to-br from-orange-500 to-red-600 p-6 text-white">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                <Gift className="h-6 w-6" />
+              </div>
+              <div>
+                <DialogTitle className="text-white text-lg font-bold">
+                  Tukar Produk ke Poin
+                </DialogTitle>
+                {selectedProductForPoints && (
+                  <p className="text-white/80 text-sm mt-1">
+                    Produk: {selectedProductForPoints.name}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="p-6 space-y-4">
+            {selectedProductForPoints && (
+              <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-lg p-4 border border-orange-200">
+                <div className="flex items-center gap-4">
+                  {selectedProductForPoints.image ? (
+                    <div className="w-16 h-16 bg-white rounded-lg overflow-hidden flex-shrink-0">
+                      {selectedProductForPoints.image.startsWith('data:') ? (
+                        <img
+                          src={selectedProductForPoints.image}
+                          alt={selectedProductForPoints.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-4xl flex items-center justify-center h-full">{selectedProductForPoints.image}</span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Package className="h-8 w-8 text-orange-500" />
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-800 text-lg">{selectedProductForPoints.name}</h3>
+                    <p className="text-sm text-gray-600">Rp {selectedProductForPoints.price.toLocaleString()}</p>
+                    <p className="text-xs text-gray-500">Stok: {selectedProductForPoints.stock}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Poin yang Dibutuhkan
+              </label>
+              <div className="flex items-center gap-3">
+                <Input
+                  type="number"
+                  min="1"
+                  value={pointVoucherData.pointsRequired}
+                  onChange={(e) => setPointVoucherData({ 
+                    ...pointVoucherData, 
+                    pointsRequired: parseInt(e.target.value) || 0 
+                  })}
+                  className="flex-1 h-12 text-lg"
+                />
+                <div className="bg-gradient-to-br from-yellow-400 to-orange-500 text-white px-4 py-3 rounded-lg">
+                  <Star className="h-5 w-5 mb-1" />
+                  <p className="font-bold">{pointVoucherData.pointsRequired} Poin</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-2">
+                * 100 Rupiah = 1 Poin (default)
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Urutan Tampilan di Halaman Tukar Poin
+              </label>
+              <Input
+                type="number"
+                min="0"
+                placeholder="0"
+                value={pointVoucherData.order}
+                onChange={(e) => setPointVoucherData({ 
+                  ...pointVoucherData, 
+                  order: parseInt(e.target.value) || 0 
+                })}
+                className="h-11"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Angka lebih kecil akan ditampilkan lebih dulu
+              </p>
+            </div>
+
+            <div className="flex gap-3 pt-4 border-t">
+              <Button
+                type="button"
+                variant="outline"
+                className="flex-1 h-11"
+                onClick={() => {
+                  setIsPointVoucherModalOpen(false)
+                  setSelectedProductForPoints(null)
+                  setPointVoucherData({ pointsRequired: 0, order: 0 })
+                }}
+              >
+                <X className="h-4 w-4 mr-2" />
+                Batal
+              </Button>
+              <Button
+                type="button"
+                className="flex-1 h-11 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white"
+                onClick={handleSavePointVoucher}
+              >
+                <Gift className="h-4 w-4 mr-2" />
+                Simpan
+              </Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

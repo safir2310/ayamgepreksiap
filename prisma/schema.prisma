@@ -189,13 +189,15 @@ model PointVoucher {
   id             String   @id @default(cuid())
   code           String   @unique
   pointsRequired Int
-  productId      String
+  productId      String?
+  productName    String?
+  productImage  String?
   userId         String
+  active         Boolean  @default(true)
   isUsed         Boolean  @default(false)
   usedOrderId    String?
   createdAt      DateTime @default(now())
   usedAt         DateTime?
-
   user           User     @relation(fields: [userId], references: [id])
 }
 
