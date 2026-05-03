@@ -1705,189 +1705,94 @@ export default function HomePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6"
+              className="mb-6 flex justify-center"
             >
-              <Card className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 border-0 shadow-xl overflow-hidden relative">
+              <Card className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 border-0 shadow-xl overflow-hidden relative" style={{ width: '340px', height: '214px', borderRadius: '12px' }}>
                 {/* Decorative pattern */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
 
-                {/* Floating Barcode Widget */}
+                {/* Floating Barcode Widget - Adjusted position */}
                 {user && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="absolute bottom-4 right-4 z-10"
+                    className="absolute bottom-2 right-2 z-10"
                   >
-                    <div className="relative">
-                      <AnimatePresence>
-                        {showFloatingBarcode && (
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                            transition={{ duration: 0.2 }}
-                            className="mb-3"
-                          >
-                            <Card className="bg-white border-2 border-orange-300 shadow-xl overflow-hidden w-64">
-                              <CardContent className="p-4">
-                                <div className="flex items-center justify-between mb-3">
-                                  <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center">
-                                      <User className="h-4 w-4 text-white" />
-                                    </div>
-                                    <div>
-                                      <p className="font-semibold text-sm text-gray-800">{user.name || 'Pelanggan'}</p>
-                                      <p className="text-xs text-gray-500">{user.memberLevel}</p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-lg p-3">
-                                  <div className="flex justify-center mb-2">
-                                    <Barcode
-                                      value={user.phone || user.id}
-                                      width={1.5}
-                                      height={40}
-                                      displayValue={false}
-                                      background="transparent"
-                                      lineColor="#1F2937"
-                                    />
-                                  </div>
-                                  <p className="text-center text-xs font-bold text-gray-800 tracking-wider">
-                                    {user.phone || user.id}
-                                  </p>
-                                </div>
-                                <div className="mt-3 grid grid-cols-3 gap-2">
-                                  <div className="text-center">
-                                    <div className="text-lg">💳</div>
-                                    <div className="text-xs font-semibold text-gray-800">{user.points}</div>
-                                  </div>
-                                  <div className="text-center">
-                                    <div className="text-lg">🎯</div>
-                                    <div className="text-xs font-semibold text-gray-800">{user.stampCount}</div>
-                                  </div>
-                                  <div className="text-center">
-                                    <div className="text-lg">⭐</div>
-                                    <div className="text-xs font-semibold text-gray-800">{user.starCount}</div>
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                        <Button
-                          onClick={() => setShowFloatingBarcode(!showFloatingBarcode)}
-                          className="h-12 w-12 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-orange-300"
-                        >
-                          <AnimatePresence mode="wait">
-                            {showFloatingBarcode ? (
-                              <motion.div
-                                key="close"
-                                initial={{ rotate: -90, opacity: 0 }}
-                                animate={{ rotate: 0, opacity: 1 }}
-                                exit={{ rotate: 90, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                <XCircle className="h-5 w-5 text-red-600" />
-                              </motion.div>
-                            ) : (
-                              <motion.div
-                                key="barcode"
-                                initial={{ rotate: 90, opacity: 0 }}
-                                animate={{ rotate: 0, opacity: 1 }}
-                                exit={{ rotate: -90, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                <QrCode className="h-5 w-5 text-red-600" />
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </Button>
-                      </motion.div>
-                    </div>
+                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                      <Button
+                        onClick={() => setShowFloatingBarcode(!showFloatingBarcode)}
+                        className="h-9 w-9 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-orange-300"
+                      >
+                        <AnimatePresence mode="wait">
+                          {showFloatingBarcode ? (
+                            <motion.div
+                              key="close"
+                              initial={{ rotate: -90, opacity: 0 }}
+                              animate={{ rotate: 0, opacity: 1 }}
+                              exit={{ rotate: 90, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <XCircle className="h-4 w-4 text-red-600" />
+                            </motion.div>
+                          ) : (
+                            <motion.div
+                              key="barcode"
+                              initial={{ rotate: 90, opacity: 0 }}
+                              animate={{ rotate: 0, opacity: 1 }}
+                              exit={{ rotate: -90, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <QrCode className="h-4 w-4 text-red-600" />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </Button>
+                    </motion.div>
                   </motion.div>
                 )}
 
-                <CardContent className="p-5 relative">
+                <CardContent className="p-4 relative h-full flex flex-col justify-between" style={{ paddingTop: '12px', paddingBottom: '12px', paddingLeft: '16px', paddingRight: '16px' }}>
                   {user ? (
                     <>
-                      <div className="flex items-start justify-between mb-4">
+                      {/* Top row: Logo and ID */}
+                      <div className="flex items-start justify-between">
                         <div className="text-white">
-                          <div className="flex items-center gap-2 mb-1">
-                            <User className="h-4 w-4" />
-                            <p className="text-sm opacity-90">Halo, {user.name || 'Pelanggan'}!</p>
-                          </div>
-                          <h2 className="text-xl font-bold flex items-center gap-2">
-                            Member {user.memberLevel}
-                            <Badge className="bg-yellow-400 text-yellow-900 text-xs font-bold">
-                              {user.memberLevel}
-                            </Badge>
-                          </h2>
+                          <h3 className="font-bold text-sm tracking-wide">MEMBER CARD</h3>
+                          <p className="text-[10px] opacity-80">{user.memberLevel}</p>
                         </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
-                          <div className="flex items-center gap-1 text-white">
-                            <Star className="h-5 w-5 fill-yellow-300" />
-                            <span className="font-bold text-lg">{user.points}</span>
-                          </div>
-                          <p className="text-white/80 text-xs text-center">Poin</p>
+                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1">
+                          <p className="text-white text-[10px] font-mono">{user.id.slice(0, 8).toUpperCase()}</p>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-3 mt-4">
-                        <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-center">
-                          <div className="text-2xl mb-1">💳</div>
-                          <div className="text-white font-bold text-lg">{user.points}</div>
-                          <div className="text-white/80 text-xs">Total Poin</div>
-                        </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-center">
-                          <div className="text-2xl mb-1">🎯</div>
-                          <div className="text-white font-bold text-lg">{user.stampCount}</div>
-                          <div className="text-white/80 text-xs">Stamp</div>
-                        </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-center">
-                          <div className="text-2xl mb-1">⭐</div>
-                          <div className="text-white font-bold text-lg">{user.starCount}</div>
-                          <div className="text-white/80 text-xs">Star</div>
+                      {/* Middle row: User info */}
+                      <div className="text-white">
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <User className="h-3 w-3" />
+                          <p className="text-xs font-semibold truncate max-w-[180px]">{user.name || 'Pelanggan'}</p>
                         </div>
                       </div>
 
-                      <div className="mt-4 pt-4 border-t border-white/20">
-                        <div className="flex items-center justify-between text-white/90 text-sm mb-3">
-                          <div className="flex items-center gap-2">
-                            <Tag className="h-4 w-4" />
-                            <span>ID Member: {user.id.slice(0, 8).toUpperCase()}</span>
-                          </div>
-                          <Badge className="bg-white/20 text-white text-xs">
-                            {user.memberLevel}
-                          </Badge>
+                      {/* Bottom row: Stats */}
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1.5 text-center">
+                          <div className="text-[10px] text-white/80">Poin</div>
+                          <div className="text-white font-bold text-sm">{user.points}</div>
                         </div>
-
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="w-full text-white hover:bg-white/20"
-                          onClick={() => setCurrentTab('account')}
-                        >
-                          Lihat Detail Member
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Button>
+                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1.5 text-center">
+                          <div className="text-[10px] text-white/80">Stamp</div>
+                          <div className="text-white font-bold text-sm">{user.stampCount}</div>
+                        </div>
+                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1.5 text-center">
+                          <div className="text-[10px] text-white/80">Star</div>
+                          <div className="text-white font-bold text-sm">{user.starCount}</div>
+                        </div>
                       </div>
                     </>
                   ) : (
-                    <div className="text-center py-4">
-                      <div className="text-5xl mb-3">👤</div>
-                      <h3 className="text-xl font-bold text-white mb-2">Bergabung Menjadi Member</h3>
-                      <p className="text-white/90 text-sm mb-4">
-                        Dapatkan poin, stamp, dan star untuk setiap pembelian!
-                      </p>
-                      <Button
-                        className="bg-white text-red-600 hover:bg-gray-100 font-bold"
-                        onClick={() => setIsAuthModalOpen(true)}
-                      >
-                        Daftar / Login Sekarang
-                      </Button>
+                    <div className="text-white text-center py-4">
+                      <p className="text-sm font-medium">Login untuk melihat kartu member</p>
                     </div>
                   )}
                 </CardContent>
