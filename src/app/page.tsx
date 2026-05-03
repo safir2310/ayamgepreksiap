@@ -1593,16 +1593,16 @@ export default function HomePage() {
                 {/* Premium Card with Metallic Effect */}
                 <div className="relative overflow-hidden" style={{ width: '340px', height: '214px', borderRadius: '20px' }}>
                   {/* Animated Gradient Background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/20 via-transparent to-pink-500/20"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-900 via-red-700 to-orange-800"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/30 via-transparent to-red-500/20"></div>
 
                   {/* Premium Gold Border */}
-                  <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-yellow-400 via-amber-300 to-yellow-500"></div>
+                  <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500"></div>
 
                   {/* Decorative Patterns */}
                   <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-4 right-4 w-32 h-32 bg-amber-400 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-4 left-4 w-24 h-24 bg-pink-400 rounded-full blur-3xl"></div>
+                    <div className="absolute top-4 right-4 w-32 h-32 bg-yellow-400 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-4 left-4 w-24 h-24 bg-red-400 rounded-full blur-3xl"></div>
                   </div>
 
                   {/* Animated Shimmer Line */}
@@ -1616,17 +1616,17 @@ export default function HomePage() {
                   <motion.div
                     animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute top-6 left-6 w-2 h-2 bg-amber-400 rounded-full shadow-lg shadow-amber-400/50"
+                    className="absolute top-6 left-6 w-2 h-2 bg-yellow-400 rounded-full shadow-lg shadow-yellow-400/50"
                   />
                   <motion.div
                     animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                    className="absolute top-12 right-8 w-1.5 h-1.5 bg-pink-400 rounded-full shadow-lg shadow-pink-400/50"
+                    className="absolute top-12 right-8 w-1.5 h-1.5 bg-orange-400 rounded-full shadow-lg shadow-orange-400/50"
                   />
                   <motion.div
                     animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                    className="absolute bottom-8 left-12 w-2 h-2 bg-white rounded-full shadow-lg shadow-white/50"
+                    className="absolute bottom-8 left-12 w-2 h-2 bg-red-400 rounded-full shadow-lg shadow-red-400/50"
                   />
 
                   {/* Metallic Accent Lines */}
@@ -1645,11 +1645,11 @@ export default function HomePage() {
                               transition={{ duration: 4, repeat: Infinity }}
                               className="flex items-center gap-2"
                             >
-                              <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg">
-                                <Crown className="h-4 w-4 text-slate-900" />
+                              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center shadow-lg">
+                                <Crown className="h-4 w-4 text-white" />
                               </div>
                               <div>
-                                <h3 className="font-bold text-xs tracking-widest text-amber-300 uppercase">Premium</h3>
+                                <h3 className="font-bold text-xs tracking-widest text-yellow-300 uppercase">Premium</h3>
                                 <p className="text-[9px] text-white/60 tracking-wide">{user.memberLevel} MEMBER</p>
                               </div>
                             </motion.div>
@@ -1658,7 +1658,7 @@ export default function HomePage() {
                             <motion.div
                               animate={{ rotate: 360 }}
                               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                              className="absolute inset-0 bg-gradient-to-r from-amber-400/30 via-pink-500/30 to-amber-400/30 rounded-lg blur-sm"
+                              className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 via-orange-500/30 to-red-400/30 rounded-lg blur-sm"
                             ></motion.div>
                             <div className="relative bg-white/10 backdrop-blur-md rounded-lg px-3 py-1.5 border border-white/20">
                               <p className="text-white text-[10px] font-mono tracking-wider">{user.id.slice(0, 8).toUpperCase()}</p>
@@ -1671,15 +1671,15 @@ export default function HomePage() {
                           <motion.div
                             animate={{ scale: [1, 1.02, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
-                            className="absolute inset-0 bg-gradient-to-r from-amber-400/20 via-pink-500/20 to-amber-400/20 blur-xl rounded-full"
+                            className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-yellow-500/20 to-red-400/20 blur-xl rounded-full"
                           ></motion.div>
-                          <div className="relative flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-xl p-2.5 border border-white/10">
+                          <div className="relative flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-xl p-2.5 border border-orange-400/20">
                             <motion.div
                               animate={{ rotate: [0, 5, -5, 0] }}
                               transition={{ duration: 3, repeat: Infinity }}
-                              className="w-10 h-10 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl flex items-center justify-center shadow-lg ring-2 ring-amber-400/50"
+                              className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center shadow-lg ring-2 ring-orange-400/50"
                             >
-                              <User className="h-5 w-5 text-slate-900" />
+                              <User className="h-5 w-5 text-white" />
                             </motion.div>
                             <div className="flex-1 min-w-0">
                               <p className="text-xs font-bold text-white truncate">{user.name || 'Pelanggan'}</p>
@@ -1692,42 +1692,42 @@ export default function HomePage() {
                         <div className="grid grid-cols-3 gap-2">
                           <motion.div
                             whileHover={{ y: -2 }}
-                            className="relative bg-gradient-to-br from-amber-400/20 to-yellow-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-amber-400/30"
+                            className="relative bg-gradient-to-br from-yellow-400/20 to-orange-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-yellow-400/30"
                           >
                             <motion.div
                               animate={{ y: [0, -3, 0] }}
                               transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
                             >
-                              <Star className="h-4 w-4 mx-auto mb-1 text-amber-400" />
+                              <Star className="h-4 w-4 mx-auto mb-1 text-yellow-400" />
                             </motion.div>
                             <div className="text-lg font-bold text-white">{user.points}</div>
-                            <div className="text-[8px] text-amber-300 font-medium">POIN</div>
+                            <div className="text-[8px] text-yellow-300 font-medium">POIN</div>
                           </motion.div>
                           <motion.div
                             whileHover={{ y: -2 }}
-                            className="relative bg-gradient-to-br from-pink-400/20 to-rose-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-pink-400/30"
+                            className="relative bg-gradient-to-br from-orange-400/20 to-red-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-orange-400/30"
                           >
                             <motion.div
                               animate={{ y: [0, -3, 0] }}
                               transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
                             >
-                              <Gift className="h-4 w-4 mx-auto mb-1 text-pink-400" />
+                              <Gift className="h-4 w-4 mx-auto mb-1 text-orange-400" />
                             </motion.div>
                             <div className="text-lg font-bold text-white">{user.stampCount}</div>
-                            <div className="text-[8px] text-pink-300 font-medium">STAMP</div>
+                            <div className="text-[8px] text-orange-300 font-medium">STAMP</div>
                           </motion.div>
                           <motion.div
                             whileHover={{ y: -2 }}
-                            className="relative bg-gradient-to-br from-purple-400/20 to-violet-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-purple-400/30"
+                            className="relative bg-gradient-to-br from-red-400/20 to-red-600/20 backdrop-blur-sm rounded-xl p-2 text-center border border-red-400/30"
                           >
                             <motion.div
                               animate={{ y: [0, -3, 0] }}
                               transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
                             >
-                              <Sparkles className="h-4 w-4 mx-auto mb-1 text-purple-400" />
+                              <Sparkles className="h-4 w-4 mx-auto mb-1 text-red-400" />
                             </motion.div>
                             <div className="text-lg font-bold text-white">{user.starCount}</div>
-                            <div className="text-[8px] text-purple-300 font-medium">STAR</div>
+                            <div className="text-[8px] text-red-300 font-medium">STAR</div>
                           </motion.div>
                         </div>
                       </>
@@ -1736,7 +1736,7 @@ export default function HomePage() {
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                          className="w-16 h-16 bg-gradient-to-br from-amber-400/20 to-pink-500/20 rounded-full flex items-center justify-center mb-3"
+                          className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full flex items-center justify-center mb-3"
                         >
                           <Lock className="h-8 w-8 text-white/40" />
                         </motion.div>
@@ -1755,13 +1755,13 @@ export default function HomePage() {
                       <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                         <Button
                           onClick={() => setIsBarcodeModalOpen(true)}
-                          className="h-10 w-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 shadow-lg shadow-amber-500/50 hover:shadow-amber-500/80 border-2 border-white"
+                          className="h-10 w-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg shadow-orange-500/50 hover:shadow-orange-500/80 border-2 border-white"
                         >
                           <motion.div
                             animate={{ rotate: [0, 360] }}
                             transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
                           >
-                            <QrCode className="h-5 w-5 text-slate-900" />
+                            <QrCode className="h-5 w-5 text-white" />
                           </motion.div>
                         </Button>
                       </motion.div>
@@ -1778,12 +1778,12 @@ export default function HomePage() {
                   transition={{ duration: 3, repeat: Infinity }}
                   className="absolute -top-2 -right-2 z-20"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/50 border-2 border-white">
+                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-xl shadow-orange-500/50 border-2 border-white">
                     <motion.div
                       animate={{ scale: [1, 1.2, 1] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     >
-                      <Crown className="h-6 w-6 text-slate-900" />
+                      <Crown className="h-6 w-6 text-white" />
                     </motion.div>
                   </div>
                 </motion.div>
