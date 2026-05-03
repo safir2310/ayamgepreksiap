@@ -2303,8 +2303,11 @@ export default function HomePage() {
                   <Card className="border-none shadow-xl overflow-hidden">
                     <CardHeader className="bg-gradient-to-r from-gray-50 to-white pb-4">
                       <CardTitle className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-                          <Settings className="h-5 w-5 text-white" />
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl blur-lg opacity-40 animate-pulse"></div>
+                          <div className="relative w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <Settings className="h-5 w-5 text-white" />
+                          </div>
                         </div>
                         <div>
                           <span className="text-xl font-bold text-gray-800">Menu Akun</span>
@@ -2322,9 +2325,16 @@ export default function HomePage() {
                           className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-50 to-red-100 p-4 border-2 border-red-200 hover:border-red-400 transition-all"
                         >
                           <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity animate-pulse"></div>
                           <div className="relative">
-                            <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow">
-                              <UserCircle className="h-7 w-7 text-white" />
+                            <div className="relative flex justify-center mb-3">
+                              <div className="absolute inset-0 bg-gradient-to-br from-red-200 to-orange-200 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                              <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-full scale-110 opacity-0 group-hover:opacity-100 transition-all group-hover:scale-125"></div>
+                              <div className="relative w-14 h-14 bg-gradient-to-br from-red-500 via-red-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg mb-0 group-hover:shadow-2xl group-hover:shadow-red-500/30 transition-all">
+                                <UserCircle className="h-7 w-7 text-white group-hover:scale-110 transition-transform" />
+                              </div>
+                              <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-400 rounded-full"></div>
+                              <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-orange-400 rounded-full"></div>
                             </div>
                             <span className="text-sm font-bold text-red-700 block">Edit Profil</span>
                             <p className="text-xs text-red-500 mt-1">Update informasi</p>
@@ -2343,10 +2353,29 @@ export default function HomePage() {
                           }`}
                         >
                           <div className="relative">
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
-                              selectedAccountSection === 'vouchers' ? 'bg-white/20' : 'bg-gradient-to-br from-orange-500 to-orange-600'
-                          }`}>
-                              <Gift className={`h-7 w-7 ${selectedAccountSection === 'vouchers' ? 'text-white' : 'text-white'}`} />
+                            <div className="relative flex justify-center mb-3">
+                              <div className="absolute -top-1.5 right-1 w-3 h-3 flex items-center justify-center">
+                                <Sparkles className="h-3 w-3 text-amber-400 animate-pulse" />
+                              </div>
+                              <div className={`absolute inset-0 rounded-full blur-md transition-all ${
+                                selectedAccountSection === 'vouchers'
+                                  ? 'bg-gradient-to-br from-amber-300 to-yellow-200 opacity-60'
+                                  : 'bg-gradient-to-br from-orange-200 to-amber-200 opacity-60 group-hover:opacity-100'
+                              }`}></div>
+                              <div className={`relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg mb-0 group-hover:shadow-2xl transition-all ${
+                                selectedAccountSection === 'vouchers'
+                                  ? 'bg-white/20 backdrop-blur-sm group-hover:shadow-white/30'
+                                  : 'bg-gradient-to-br from-orange-500 via-orange-600 to-amber-500 group-hover:shadow-orange-500/30'
+                              }`}>
+                                <Gift className={`h-7 w-7 ${selectedAccountSection === 'vouchers' ? 'text-white group-hover:scale-110 transition-transform' : 'text-white group-hover:scale-110 transition-transform'}`} />
+                              </div>
+                              <div className={`absolute -top-2 -right-2 w-4 h-4 transition-all ${
+                                selectedAccountSection === 'vouchers' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                              }`}>
+                                <div className="w-full h-full bg-gradient-to-br from-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md">
+                                  <span className="text-white text-[8px] font-bold">!</span>
+                                </div>
+                              </div>
                             </div>
                             <span className={`text-sm font-bold block ${selectedAccountSection === 'vouchers' ? 'text-white' : 'text-orange-700'}`}>Voucher</span>
                             <p className={`text-xs mt-1 ${selectedAccountSection === 'vouchers' ? 'text-white/80' : 'text-orange-500'}`}>Diskon spesial</p>
@@ -2364,14 +2393,35 @@ export default function HomePage() {
                               : 'bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 hover:border-purple-400'
                           }`}
                         >
-                          <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center">
-                            <span className="text-[10px] text-white font-bold">3</span>
+                          <div className="absolute -top-1 -right-1 z-10">
+                            <div className="relative">
+                              <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75"></div>
+                              <div className="relative w-5 h-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center shadow-lg">
+                                <span className="text-[10px] text-white font-bold">3</span>
+                              </div>
+                            </div>
                           </div>
                           <div className="relative">
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
-                              selectedAccountSection === 'notifications' ? 'bg-white/20' : 'bg-gradient-to-br from-purple-500 to-purple-600'
-                            }`}>
-                              <Bell className={`h-7 w-7 ${selectedAccountSection === 'notifications' ? 'text-white' : 'text-white'}`} />
+                            <div className="relative flex justify-center mb-3">
+                              <div className={`absolute inset-0 rounded-full border-2 border-dashed transition-all ${
+                                selectedAccountSection === 'notifications'
+                                  ? 'border-white/40 animate-spin-slow'
+                                  : 'border-purple-300 opacity-0 group-hover:opacity-100 group-hover:animate-spin-slow'
+                              }`}></div>
+                              <div className={`absolute inset-0 rounded-full border-2 border-dotted transition-all ${
+                                selectedAccountSection === 'notifications'
+                                  ? 'border-white/30 animate-reverse-spin'
+                                  : 'border-purple-200 opacity-0 group-hover:opacity-100 group-hover:animate-reverse-spin'
+                              }`}></div>
+                              <div className={`relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg mb-0 group-hover:shadow-2xl transition-all ${
+                                selectedAccountSection === 'notifications'
+                                  ? 'bg-white/20 backdrop-blur-sm group-hover:shadow-white/30'
+                                  : 'bg-gradient-to-br from-purple-500 via-purple-600 to-indigo-500 group-hover:shadow-purple-500/30'
+                              }`}>
+                                <Bell className={`h-7 w-7 ${selectedAccountSection === 'notifications' ? 'text-white animate-wiggle' : 'text-white group-hover:animate-wiggle'} transition-transform`} />
+                              </div>
+                              <div className="absolute top-0 left-0 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                              <div className="absolute bottom-0 right-0 w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
                             </div>
                             <span className={`text-sm font-bold block ${selectedAccountSection === 'notifications' ? 'text-white' : 'text-purple-700'}`}>Notifikasi</span>
                             <p className={`text-xs mt-1 ${selectedAccountSection === 'notifications' ? 'text-white/80' : 'text-purple-500'}`}>Info & promo</p>
@@ -2390,10 +2440,32 @@ export default function HomePage() {
                           }`}
                         >
                           <div className="relative">
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
-                              selectedAccountSection === 'security' ? 'bg-white/20' : 'bg-gradient-to-br from-blue-500 to-blue-600'
-                            }`}>
-                              <Lock className={`h-7 w-7 ${selectedAccountSection === 'security' ? 'text-white' : 'text-white'}`} />
+                            <div className="relative flex justify-center mb-3">
+                              <div className={`absolute inset-0 rounded-full border-4 transition-all ${
+                                selectedAccountSection === 'security'
+                                  ? 'border-white/20'
+                                  : 'border-blue-200 opacity-0 group-hover:opacity-100'
+                              }`}></div>
+                              <div className={`absolute inset-2 rounded-full border-2 transition-all ${
+                                selectedAccountSection === 'security'
+                                  ? 'border-white/30'
+                                  : 'border-blue-100 opacity-0 group-hover:opacity-100'
+                              }`}></div>
+                              <div className={`absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity`}></div>
+                              <div className={`relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg mb-0 group-hover:shadow-2xl transition-all ${
+                                selectedAccountSection === 'security'
+                                  ? 'bg-white/20 backdrop-blur-sm group-hover:shadow-white/30'
+                                  : 'bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-500 group-hover:shadow-blue-500/30'
+                              }`}>
+                                <Lock className={`h-7 w-7 ${selectedAccountSection === 'security' ? 'text-white group-hover:scale-110 transition-transform' : 'text-white group-hover:scale-110 transition-transform'}`} />
+                              </div>
+                              <div className={`absolute -bottom-0.5 w-3 h-3 flex items-center justify-center transition-all ${
+                                selectedAccountSection === 'security' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                              }`}>
+                                <div className="w-full h-full bg-green-400 rounded-full flex items-center justify-center shadow-md animate-pulse">
+                                  <CheckCircle className="h-2 w-2 text-white" />
+                                </div>
+                              </div>
                             </div>
                             <span className={`text-sm font-bold block ${selectedAccountSection === 'security' ? 'text-white' : 'text-blue-700'}`}>Keamanan</span>
                             <p className={`text-xs mt-1 ${selectedAccountSection === 'security' ? 'text-white/80' : 'text-blue-500'}`}>Password & akun</p>
@@ -2412,10 +2484,25 @@ export default function HomePage() {
                           }`}
                         >
                           <div className="relative">
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
-                              selectedAccountSection === 'settings' ? 'bg-white/20' : 'bg-gradient-to-br from-gray-600 to-gray-700'
-                            }`}>
-                              <Settings className={`h-7 w-7 ${selectedAccountSection === 'settings' ? 'text-white' : 'text-white'}`} />
+                            <div className="relative flex justify-center mb-3">
+                              <div className={`absolute inset-0 rounded-full border-2 border-dashed transition-all ${
+                                selectedAccountSection === 'settings'
+                                  ? 'border-white/30 animate-spin-slow'
+                                  : 'border-gray-300 opacity-0 group-hover:opacity-100 group-hover:animate-spin-slow'
+                              }`}></div>
+                              <div className={`relative w-14 h-14 flex items-center justify-center shadow-lg mb-0 group-hover:shadow-2xl transition-all ${
+                                selectedAccountSection === 'settings'
+                                  ? 'bg-white/20 backdrop-blur-sm group-hover:shadow-white/20'
+                                  : 'bg-gradient-to-br from-gray-600 via-gray-700 to-slate-600 group-hover:shadow-gray-500/30'
+                              }`} style={{
+                                clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
+                              }}>
+                                <Settings className={`h-6 w-6 ${selectedAccountSection === 'settings' ? 'text-white animate-spin-slow' : 'text-white group-hover:animate-spin-slow'} transition-transform`} />
+                              </div>
+                              <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-gray-400 rounded-full animate-pulse"></div>
+                              <div className="absolute bottom-0 left-0 w-1.5 h-1.5 bg-slate-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                              <div className="absolute top-1/2 -right-2 w-2 h-2 bg-gray-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                              <div className="absolute top-1/2 -left-2 w-2 h-2 bg-slate-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </div>
                             <span className={`text-sm font-bold block ${selectedAccountSection === 'settings' ? 'text-white' : 'text-gray-700'}`}>Pengaturan</span>
                             <p className={`text-xs mt-1 ${selectedAccountSection === 'settings' ? 'text-white/80' : 'text-gray-500'}`}>Preferensi</p>
@@ -2429,12 +2516,22 @@ export default function HomePage() {
                           onClick={handleLogout}
                           className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-50 to-red-100 p-4 border-2 border-red-200 hover:border-red-400 hover:from-red-100 hover:to-red-200 transition-all"
                         >
+                          <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity animate-pulse"></div>
+                          <div className="absolute bottom-2 left-2 w-1.5 h-1.5 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity animate-pulse" style={{ animationDelay: '0.2s' }}></div>
                           <div className="relative">
-                            <div className="w-14 h-14 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow">
-                              <LogOut className="h-7 w-7 text-white" />
+                            <div className="relative flex justify-center mb-3">
+                              <div className="absolute inset-0 bg-gradient-to-br from-red-300 to-rose-300 rounded-full blur-md opacity-0 group-hover:opacity-80 transition-opacity"></div>
+                              <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 to-rose-500/30 rounded-full scale-110 opacity-0 group-hover:opacity-100 transition-all group-hover:scale-125"></div>
+                              <div className="relative w-14 h-14 bg-gradient-to-br from-red-600 via-red-700 to-rose-600 rounded-full flex items-center justify-center shadow-lg mb-0 group-hover:shadow-2xl group-hover:shadow-red-500/40 transition-all">
+                                <LogOut className="h-7 w-7 text-white group-hover:scale-110 group-hover:translate-x-1 transition-all" />
+                              </div>
+                              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity animate-bounce">
+                                <AlertCircle className="h-2 w-2 text-white" />
+                              </div>
                             </div>
-                            <span className="text-sm font-bold text-red-700 block">Logout</span>
-                            <p className="text-xs text-red-500 mt-1">Keluar akun</p>
+                            <span className="text-sm font-bold text-red-700 block group-hover:text-red-800 transition-colors">Logout</span>
+                            <p className="text-xs text-red-500 mt-1 group-hover:text-red-600 transition-colors">Keluar akun</p>
                           </div>
                         </motion.button>
                       </div>
