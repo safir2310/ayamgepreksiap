@@ -345,3 +345,37 @@ Stage Summary:
 - All mobile breakpoints fully responsive
 - Premium animations and effects integrated
 - Design ready for testing
+
+---
+Task ID: 2
+Agent: zai-code
+Task: Remove "Login sebagai admin (PIN: 1234)" feature
+
+Work Log:
+- Removed admin PIN API route: `/src/app/api/auth/admin-pin/route.ts`
+- Removed state variables from page.tsx:
+  * `adminTapCount`
+  * `adminTapTimeout`
+  * `logoPressTimer`
+  * `isPressing`
+  * `showAdminPinModal`
+  * `adminPin`
+- Removed handler functions from page.tsx:
+  * `handleLogoTap`
+  * `handleLogoPressStart`
+  * `handleLogoPressEnd`
+  * `handleAdminPinSubmit`
+- Removed cleanup useEffect for admin tap timeout
+- Removed event handlers from logo element (onClick, onTouchStart, onMouseDown, etc.)
+- Removed UI indicators for admin PIN access:
+  * Press indicator (animate-pulse overlay)
+  * Admin tap count indicator with dots
+  * "X lagi..." text showing remaining taps
+  * Long-press hint with progress bar and "Tahan..." text
+- Kept URL parameter check for admin access (`?admin=true`) as alternative method
+
+Stage Summary:
+- Successfully removed PIN-based admin login feature
+- All related state, handlers, and UI elements removed
+- Application compiles and runs successfully
+- Admin access still available via URL parameter and regular login

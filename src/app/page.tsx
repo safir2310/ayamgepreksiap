@@ -976,111 +976,9 @@ export default function HomePage() {
     notes: '',
   })
   const [showAdminDashboard, setShowAdminDashboard] = useState(false)
-  const [adminTapCount, setAdminTapCount] = useState(0)
-  const [adminTapTimeout, setAdminTapTimeout] = useState<NodeJS.Timeout | null>(null)
-  const [logoPressTimer, setLogoPressTimer] = useState<NodeJS.Timeout | null>(null)
-  const [isPressing, setIsPressing] = useState(false)
-  const [showAdminPinModal, setShowAdminPinModal] = useState(false)
-  const [adminPin, setAdminPin] = useState('')
   const [selectedVoucher, setSelectedVoucher] = useState<string>('')
 
-  // Mobile admin access - double tap on logo (easier than triple tap)
-  const handleLogoTap = () => {
-    if (typeof window === 'undefined') return
 
-    // Only enable on mobile
-    if (window.innerWidth >= 768) return
-
-    const newTapCount = adminTapCount + 1
-    setAdminTapCount(newTapCount)
-
-    // Clear existing timeout
-    if (adminTapTimeout) {
-      clearTimeout(adminTapTimeout)
-    }
-
-    // Check if double-tap within 1 second (changed from triple to double)
-    const timeout = setTimeout(() => {
-      if (newTapCount >= 2) {
-        setShowAdminPinModal(true)
-        setAdminTapCount(0)
-      } else {
-        setAdminTapCount(0)
-      }
-    }, 1000)
-
-    setAdminTapTimeout(timeout)
-  }
-
-  // Long-press handler for admin access (2 seconds)
-  const handleLogoPressStart = () => {
-    if (typeof window === 'undefined') return
-    if (window.innerWidth >= 768) return
-
-    setIsPressing(true)
-    const timer = setTimeout(() => {
-      setShowAdminPinModal(true)
-      setIsPressing(false)
-    }, 2000)
-    setLogoPressTimer(timer)
-  }
-
-  const handleLogoPressEnd = () => {
-    setIsPressing(false)
-    if (logoPressTimer) {
-      clearTimeout(logoPressTimer)
-      setLogoPressTimer(null)
-    }
-  }
-
-  const handleAdminPinSubmit = async () => {
-    if (!adminPin) {
-      toast.error('PIN wajib diisi')
-      return
-    }
-
-    try {
-      const res = await fetch('/api/auth/admin-pin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ pin: adminPin }),
-      })
-
-      const data = await res.json()
-
-      if (res.ok && data.success) {
-        // Update user and token in store
-        setUser(data.user)
-        setToken(data.token)
-
-        setShowAdminPinModal(false)
-        setShowAdminDashboard(true)
-        setAdminPin('')
-        toast.success('🔓 Admin panel terbuka!')
-      } else {
-        toast.error(data.error || '❌ PIN salah!')
-        setAdminPin('')
-      }
-    } catch (error) {
-      console.error('Admin login error:', error)
-      toast.error('Terjadi kesalahan saat login admin')
-      setAdminPin('')
-    }
-  }
-
-  // Cleanup admin tap timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (adminTapTimeout) {
-        clearTimeout(adminTapTimeout)
-      }
-      if (logoPressTimer) {
-        clearTimeout(logoPressTimer)
-      }
-    }
-  }, [])
 
   // Check URL parameter for admin access
   useEffect(() => {
@@ -1487,13 +1385,7 @@ export default function HomePage() {
             {/* Logo Section */}
             <div className="flex items-center gap-2 sm:gap-2 flex-shrink-0">
               <div
-                className="w-10 h-10 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center shadow-md cursor-pointer select-none active:scale-95 transition-transform md:cursor-default relative"
-                onClick={handleLogoTap}
-                onTouchStart={handleLogoPressStart}
-                onMouseDown={handleLogoPressStart}
-                onTouchEnd={handleLogoPressEnd}
-                onMouseUp={handleLogoPressEnd}
-                onMouseLeave={handleLogoPressEnd}
+                className="w-10 h-10 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center shadow-md select-none md:cursor-default relative"
               >
                 <svg viewBox="0 0 100 100" className="w-8 h-8 sm:w-8 sm:h-8">
                   <defs>
@@ -1578,10 +1470,6 @@ export default function HomePage() {
                   <circle cx="42" cy="30" r="1.5" fill="#F97316" opacity="0.5" />
                   <circle cx="58" cy="30" r="1.5" fill="#F97316" opacity="0.5" />
                 </svg>
-                {/* Press indicator */}
-                {isPressing && (
-                  <div className="absolute inset-0 bg-white/20 rounded-lg animate-pulse" />
-                )}
               </div>
               <div>
                 <h1 className="text-[11px] sm:text-xs font-bold text-white tracking-wide leading-tight">AYAM GEPREK SAMBAL IJO</h1>
@@ -1592,33 +1480,6 @@ export default function HomePage() {
                   <MapPin className="h-2.5 w-2.5 sm:h-2.5 sm:w-2.5" />
                   <span className="truncate max-w-[100px] sm:max-w-[150px]">Jl. Medan - Banda Aceh, Simpang Camat, Gampong Tijue, 24151</span>
                 </button>
-                {/* Mobile Admin Tap Indicator - Changed to 2 for double-tap */}
-                {adminTapCount > 0 && (
-                  <div className="md:hidden flex items-center gap-1 mt-1">
-                    <div className="flex gap-0.5">
-                      {[1, 2].map((i) => (
-                        <div
-                          key={i}
-                          className={`w-4 h-0.5 rounded-full transition-colors ${
-                            i <= adminTapCount ? 'bg-white' : 'bg-white/30'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-[8px] text-white/80">
-                      {2 - adminTapCount} lagi...
-                    </span>
-                  </div>
-                )}
-                {/* Long-press hint */}
-                {isPressing && (
-                  <div className="md:hidden flex items-center gap-1 mt-1">
-                    <div className="w-16 h-1 bg-white/60 rounded-full overflow-hidden">
-                      <div className="h-full bg-white animate-[width_2s_ease-in-out_forwards]" style={{ width: '100%' }} />
-                    </div>
-                    <span className="text-[8px] text-white/80">Tahan...</span>
-                  </div>
-                )}
               </div>
             </div>
 
