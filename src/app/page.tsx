@@ -2080,6 +2080,16 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             {user ? (
               <div className="space-y-6">
+                {/* Page Title - Beranda */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center py-4"
+                >
+                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Beranda</h1>
+                </motion.div>
+
                 {/* Modern Profile Design 2025 */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -2710,8 +2720,8 @@ export default function HomePage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <Card className="border-none shadow-xl overflow-hidden">
-                      <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white pb-6">
+                    <Card className="border-none shadow-xl overflow-hidden rounded-2xl">
+                      <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white pb-6 rounded-t-2xl">
                         <div className="flex items-center justify-between">
                           <CardTitle className="flex items-center gap-3">
                             <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
@@ -2745,7 +2755,7 @@ export default function HomePage() {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <h6 className="font-bold text-gray-800">Promo Spesial</h6>
-                                <Badge className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5">Baru</Badge>
+                                <Badge className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Baru</Badge>
                               </div>
                               <p className="text-sm text-gray-600">Diskon hingga 17% untuk semua produk belanjaan</p>
                               <p className="text-xs text-gray-400 mt-2">Baru saja</p>
@@ -2769,7 +2779,7 @@ export default function HomePage() {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <h6 className="font-bold text-gray-800">Order Selesai</h6>
-                                <Badge variant="outline" className="border-green-300 text-green-600 text-[10px] font-bold px-2 py-0.5">Info</Badge>
+                                <Badge variant="outline" className="border-green-300 text-green-600 text-[10px] font-bold px-2 py-0.5 rounded-full">Info</Badge>
                               </div>
                               <p className="text-sm text-gray-600">Order #ORD-12345 telah selesai diproses</p>
                               <p className="text-xs text-gray-400 mt-2">5 menit yang lalu</p>
@@ -2793,7 +2803,7 @@ export default function HomePage() {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <h6 className="font-bold text-gray-800">Poin Bertambah</h6>
-                                <Badge className="bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-0.5">Reward</Badge>
+                                <Badge className="bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Reward</Badge>
                               </div>
                               <p className="text-sm text-gray-600">Anda mendapat 100 poin dari pembelian Rp 50.000</p>
                               <p className="text-xs text-gray-400 mt-2">10 menit yang lalu</p>
