@@ -1751,22 +1751,6 @@ export default function HomePage() {
                   {/* Holographic Effect */}
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent via-white/5 to-transparent pointer-events-none"></div>
                 </div>
-
-                {/* Premium Badge */}
-                <motion.div
-                  animate={{ rotate: [-5, 5, -5] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute -top-2 -right-2 z-20"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-xl shadow-orange-500/50 border-2 border-white">
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <Crown className="h-6 w-6 text-white" />
-                    </motion.div>
-                  </div>
-                </motion.div>
               </motion.div>
             </motion.div>
 
