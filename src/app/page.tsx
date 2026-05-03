@@ -1720,8 +1720,8 @@ export default function HomePage() {
               {/* Categories Container */}
               {categoryViewMode === 'horizontal' ? (
                 /* Horizontal Scroll Mode */
-                <ScrollArea className="w-full">
-                  <div className="flex gap-3 py-3 px-3">
+                <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                  <div className="flex gap-3 py-3 px-3 min-w-max">
                     {categories.map((category) => {
                       const getCategoryIcon = () => {
                         const iconSize = selectedCategory === category.id ? 20 : 18
@@ -1765,9 +1765,9 @@ export default function HomePage() {
                       )
                     })}
                   </div>
-                </ScrollArea>
+                </div>
               ) : (
-                /* Vertical Sidebar Mode */}
+                /* Vertical Sidebar Mode */
                 <div className="py-3 px-3">
                   <div className="flex flex-col gap-2">
                     {categories.map((category) => {
@@ -1947,8 +1947,8 @@ export default function HomePage() {
               {/* Categories Container */}
               {categoryViewMode === 'horizontal' ? (
                 /* Horizontal Scroll Mode */
-                <ScrollArea className="w-full">
-                  <div className="flex gap-3 py-3 px-3">
+                <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                  <div className="flex gap-3 py-3 px-3 min-w-max">
                     {categories.map((category) => {
                       const getCategoryIcon = () => {
                         const iconSize = selectedCategory === category.id ? 20 : 18
@@ -1992,7 +1992,7 @@ export default function HomePage() {
                       )
                     })}
                   </div>
-                </ScrollArea>
+                </div>
               ) : (
                 /* Vertical Sidebar Mode */
                 <div className="py-3 px-3">
