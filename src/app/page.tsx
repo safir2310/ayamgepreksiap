@@ -1655,11 +1655,6 @@ export default function HomePage() {
                             </motion.div>
                           </div>
                           <div className="relative">
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                              className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 via-orange-500/30 to-red-400/30 rounded-lg blur-sm"
-                            ></motion.div>
                             <div className="relative bg-white/10 backdrop-blur-md rounded-lg px-3 py-1.5 border border-white/20">
                               <p className="text-white text-[10px] font-mono tracking-wider">{user.id.slice(0, 8).toUpperCase()}</p>
                             </div>
