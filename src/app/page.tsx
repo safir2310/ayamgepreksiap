@@ -49,6 +49,7 @@ import {
   Coffee,
   Cookie,
   LayoutDashboard,
+  Crown,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -2077,233 +2078,367 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             {user ? (
               <div className="space-y-6">
-                {/* Profile Header Card - Modern Glass Effect */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-500 via-orange-500 to-red-600 shadow-2xl">
-                  {/* Decorative Circles */}
-                  <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-                  <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>
+                {/* Modern Profile Design 2025 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="space-y-6"
+                >
+                  {/* Premium Profile Header */}
+                  <div className="relative overflow-hidden">
+                    {/* Animated Background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-orange-500 to-pink-500"></div>
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+                    
+                    {/* Floating Particles */}
+                    <motion.div 
+                      animate={{ y: [0, -20, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute top-10 left-10 w-4 h-4 bg-white/20 rounded-full blur-sm"
+                    />
+                    <motion.div 
+                      animate={{ y: [0, -15, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                      className="absolute top-20 right-20 w-3 h-3 bg-yellow-300/30 rounded-full blur-sm"
+                    />
+                    <motion.div 
+                      animate={{ y: [0, -25, 0] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                      className="absolute bottom-10 left-1/4 w-2 h-2 bg-white/20 rounded-full blur-sm"
+                    />
 
-                  <CardContent className="relative p-6 text-white">
-                    <div className="flex flex-col md:flex-row items-center gap-6">
-                      {/* Profile Photo with Glow Effect */}
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-sm opacity-75 animate-pulse"></div>
-                        <Avatar className="relative w-28 h-28 border-4 border-white/30 shadow-xl ring-4 ring-white/20">
-                          <AvatarImage src={(user as any).profilePhoto || undefined} />
-                          <AvatarFallback className="text-4xl bg-white/90 text-red-600 font-bold shadow-inner">
-                            {user.name?.charAt(0).toUpperCase() || 'P'}
-                          </AvatarFallback>
-                        </Avatar>
-                        {/* Edit Photo Button Overlay */}
-                        <button
-                          onClick={handleOpenEditProfile}
-                          className="absolute -bottom-1 -right-1 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-red-600 hover:scale-110 hover:bg-red-50 transition-all"
+                    <CardContent className="relative p-6 sm:p-8">
+                      <div className="flex flex-col sm:flex-row items-center gap-6">
+                        {/* Profile Photo with Premium Effects */}
+                        <motion.div
+                          whileHover={{ scale: 1.05, rotate: 2 }}
+                          className="relative"
                         >
-                          <UserCircle className="h-5 w-5" />
-                        </button>
-                      </div>
+                          <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-400 to-red-500 rounded-full blur-xl opacity-60 animate-pulse"></div>
+                          <div className="relative">
+                            <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 shadow-2xl">
+                              <Avatar className="w-full h-full border-4 border-white/20">
+                                <AvatarImage src={(user as any).profilePhoto || undefined} className="object-cover" />
+                                <AvatarFallback className="text-4xl bg-gradient-to-br from-red-50 to-orange-100 text-red-600 font-bold">
+                                  {user.name?.charAt(0).toUpperCase() || 'P'}
+                                </AvatarFallback>
+                              </Avatar>
+                            </div>
+                            {/* Status Indicator */}
+                            <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-3 border-white rounded-full shadow-lg">
+                              <div className="w-full h-full bg-green-400 rounded-full animate-ping opacity-75"></div>
+                            </div>
+                          </div>
+                          {/* Level Badge */}
+                          <motion.div
+                            animate={{ rotate: [-5, 5, -5] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                            className="absolute -top-2 -right-2"
+                          >
+                            <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                              <Star className="h-7 w-7 text-white" />
+                            </div>
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap">
+                              {user.memberLevel}
+                            </div>
+                          </motion.div>
+                        </motion.div>
 
-                      {/* User Info */}
-                      <div className="flex-1 text-center md:text-left">
-                        <div className="flex flex-col md:flex-row items-center gap-3 mb-2">
-                          <h3 className="text-2xl font-bold">{user.name || 'Pelanggan'}</h3>
-                          <Badge className="px-3 py-1 bg-yellow-400 text-yellow-900 font-bold text-sm shadow-md">
-                            {user.memberLevel}
-                          </Badge>
+                        {/* User Info with Enhanced Typography */}
+                        <div className="flex-1 text-center sm:text-left">
+                          <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <h3 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
+                              {user.name || 'Pelanggan'}
+                            </h3>
+                            <p className="text-white/90 text-sm mb-3">{user.email}</p>
+                            
+                            {/* Contact Info */}
+                            <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
+                              {user.phone && (
+                                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                                  <Phone className="h-4 w-4 text-white" />
+                                  <span className="text-xs text-white font-medium">{user.phone}</span>
+                                </div>
+                              )}
+                              {user.address && (
+                                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                                  <MapPin className="h-4 w-4 text-white" />
+                                  <span className="text-xs text-white font-medium truncate max-w-[150px]">
+                                    {user.address.length > 30 ? user.address.substring(0, 30) + '...' : user.address}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </motion.div>
                         </div>
-                        <p className="text-white/90 text-sm mb-1">{user.email}</p>
-                        <div className="flex items-center gap-2 justify-center md:justify-start">
-                          {user.phone && (
-                            <span className="text-xs text-white/80 flex items-center gap-1">
-                              <Phone className="h-3 w-3" />
-                              {user.phone}
-                            </span>
-                          )}
-                          {user.address && (
-                            <span className="text-xs text-white/80 flex items-center gap-1">
-                              <MapPin className="h-3 w-3" />
-                              {user.address.length > 20 ? user.address.substring(0, 20) + '...' : user.address}
-                            </span>
-                          )}
+                      </div>
+                    </CardContent>
+                  </div>
+
+                  {/* Achievement Progress */}
+                  <Card className="border-none shadow-xl overflow-hidden">
+                    <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="text-white font-bold text-lg">Level Progress</h4>
+                        <Badge className="bg-yellow-400 text-yellow-900 font-bold">Gold Member</Badge>
+                      </div>
+                      <div className="space-y-3">
+                        {/* XP Progress Bar */}
+                        <div>
+                          <div className="flex justify-between text-xs text-gray-300 mb-1">
+                            <span>Experience Points</span>
+                            <span className="text-yellow-400 font-bold">2,450 / 3,000 XP</span>
+                          </div>
+                          <div className="h-3 bg-gray-700 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: '82%' }}
+                              transition={{ duration: 1.5, ease: "easeOut" }}
+                              className="h-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 rounded-full"
+                            />
+                          </div>
+                        </div>
+                        
+                        {/* Next Level Info */}
+                        <div className="flex items-center gap-4 bg-gray-800/50 rounded-lg p-3">
+                          <div className="flex -space-x-2">
+                            <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full border-2 border-gray-800 flex items-center justify-center">
+                              <Star className="h-4 w-4 text-white" />
+                            </div>
+                            <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full border-2 border-gray-800 flex items-center justify-center">
+                              <Flame className="h-4 w-4 text-white" />
+                            </div>
+                            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full border-2 border-gray-800 flex items-center justify-center opacity-50">
+                              <Crown className="h-4 w-4 text-white" />
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-xs text-gray-300">550 XP lagi menuju <span className="text-purple-400 font-bold">Platinum Member</span></p>
+                          </div>
+                          <ArrowRight className="h-5 w-5 text-gray-400" />
                         </div>
                       </div>
                     </div>
-                  </CardContent>
-                </div>
+                  </Card>
 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-3 gap-4">
-                  {/* Points Card */}
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <Card className="relative overflow-hidden bg-gradient-to-br from-red-50 to-red-100 border-red-200 shadow-md hover:shadow-xl transition-all">
-                      <CardContent className="p-4 text-center relative">
-                        <div className="absolute top-2 right-2 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-                          <Star className="h-4 w-4 text-white" />
-                        </div>
-                        <div className="text-3xl font-bold text-red-600 mb-1">{user.points}</div>
-                        <div className="text-sm font-semibold text-red-700">Poin</div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+                  {/* Modern Stats Cards */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {/* Points Card */}
+                    <motion.div
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Card className="relative overflow-hidden border-0 shadow-lg">
+                        <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-red-600"></div>
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                        <CardContent className="relative p-4 text-center text-white">
+                          <motion.div
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2"
+                          >
+                            <Star className="h-5 w-5" />
+                          </motion.div>
+                          <div className="text-2xl font-bold mb-1">{user.points}</div>
+                          <div className="text-xs font-medium text-white/80">Poin</div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
 
-                  {/* Stamps Card */}
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <Card className="relative overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 shadow-md hover:shadow-xl transition-all">
-                      <CardContent className="p-4 text-center relative">
-                        <div className="absolute top-2 right-2 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                          <Flame className="h-4 w-4 text-white" />
-                        </div>
-                        <div className="text-3xl font-bold text-orange-600 mb-1">{user.stampCount}</div>
-                        <div className="text-sm font-semibold text-orange-700">Stamp</div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+                    {/* Stamps Card */}
+                    <motion.div
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <Card className="relative overflow-hidden border-0 shadow-lg">
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600"></div>
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                        <CardContent className="relative p-4 text-center text-white">
+                          <motion.div
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                            className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2"
+                          >
+                            <Flame className="h-5 w-5" />
+                          </motion.div>
+                          <div className="text-2xl font-bold mb-1">{user.stampCount}</div>
+                          <div className="text-xs font-medium text-white/80">Stamp</div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
 
-                  {/* Stars Card */}
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <Card className="relative overflow-hidden bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200 shadow-md hover:shadow-xl transition-all">
-                      <CardContent className="p-4 text-center relative">
-                        <div className="absolute top-2 right-2 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
-                          <Gift className="h-4 w-4 text-white" />
-                        </div>
-                        <div className="text-3xl font-bold text-yellow-600 mb-1">{user.starCount}</div>
-                        <div className="text-sm font-semibold text-yellow-700">Star</div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </div>
+                    {/* Stars Card */}
+                    <motion.div
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <Card className="relative overflow-hidden border-0 shadow-lg">
+                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-amber-500"></div>
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                        <CardContent className="relative p-4 text-center text-white">
+                          <motion.div
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                            className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2"
+                          >
+                            <Gift className="h-5 w-5" />
+                          </motion.div>
+                          <div className="text-2xl font-bold mb-1">{user.starCount}</div>
+                          <div className="text-xs font-medium text-white/80">Star</div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </div>
 
-                {/* Quick Actions - Grid Layout */}
-                <Card className="shadow-lg border-gray-200">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="flex items-center gap-2 text-gray-800">
-                      <Settings className="h-5 w-5 text-red-600" />
-                      Menu Cepat
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {/* Edit Profile */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={handleOpenEditProfile}
-                        className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-red-50 to-red-100 border border-red-200 hover:shadow-md transition-all"
-                      >
-                        <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
-                          <UserCircle className="h-6 w-6 text-white" />
+                  {/* Quick Actions Menu */}
+                  <Card className="border-none shadow-xl overflow-hidden">
+                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white pb-4">
+                      <CardTitle className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                          <Settings className="h-5 w-5 text-white" />
                         </div>
-                        <span className="text-sm font-semibold text-red-700">Edit Profil</span>
-                      </motion.button>
+                        <div>
+                          <span className="text-xl font-bold text-gray-800">Menu Akun</span>
+                          <p className="text-xs text-gray-500 font-normal">Kelola profil dan preferensi</p>
+                        </div>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {/* Edit Profile */}
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={handleOpenEditProfile}
+                          className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-50 to-red-100 p-4 border-2 border-red-200 hover:border-red-400 transition-all"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          <div className="relative">
+                            <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow">
+                              <UserCircle className="h-7 w-7 text-white" />
+                            </div>
+                            <span className="text-sm font-bold text-red-700 block">Edit Profil</span>
+                            <p className="text-xs text-red-500 mt-1">Update informasi</p>
+                          </div>
+                        </motion.button>
 
-                      {/* Vouchers */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setSelectedAccountSection('vouchers')}
-                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
-                          selectedAccountSection === 'vouchers'
-                            ? 'bg-gradient-to-br from-red-500 to-orange-500 border-red-500 shadow-xl'
-                            : 'bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 hover:shadow-md'
-                        }`}
-                      >
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
-                          selectedAccountSection === 'vouchers' ? 'bg-white' : 'bg-orange-500'
-                        }`}>
-                          <Gift className={`h-6 w-6 ${selectedAccountSection === 'vouchers' ? 'text-red-500' : 'text-white'}`} />
-                        </div>
-                        <span className={`text-sm font-semibold ${selectedAccountSection === 'vouchers' ? 'text-white' : 'text-orange-700'}`}>
-                          Voucher
-                        </span>
-                      </motion.button>
+                        {/* Vouchers */}
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setSelectedAccountSection('vouchers')}
+                          className={`group relative overflow-hidden rounded-2xl p-4 border-2 transition-all ${
+                            selectedAccountSection === 'vouchers'
+                              ? 'bg-gradient-to-br from-orange-500 to-orange-600 border-orange-500 shadow-xl'
+                              : 'bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 hover:border-orange-400'
+                          }`}
+                        >
+                          <div className="relative">
+                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
+                              selectedAccountSection === 'vouchers' ? 'bg-white/20' : 'bg-gradient-to-br from-orange-500 to-orange-600'
+                          }`}>
+                              <Gift className={`h-7 w-7 ${selectedAccountSection === 'vouchers' ? 'text-white' : 'text-white'}`} />
+                            </div>
+                            <span className={`text-sm font-bold block ${selectedAccountSection === 'vouchers' ? 'text-white' : 'text-orange-700'}`}>Voucher</span>
+                            <p className={`text-xs mt-1 ${selectedAccountSection === 'vouchers' ? 'text-white/80' : 'text-orange-500'}`}>Diskon spesial</p>
+                          </div>
+                        </motion.button>
 
-                      {/* Notifications */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setSelectedAccountSection('notifications')}
-                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
-                          selectedAccountSection === 'notifications'
-                            ? 'bg-gradient-to-br from-red-500 to-orange-500 border-red-500 shadow-xl'
-                            : 'bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 hover:shadow-md'
-                        }`}
-                      >
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
-                          selectedAccountSection === 'notifications' ? 'bg-white' : 'bg-purple-500'
-                        }`}>
-                          <Bell className={`h-6 w-6 ${selectedAccountSection === 'notifications' ? 'text-red-500' : 'text-white'}`} />
-                        </div>
-                        <span className={`text-sm font-semibold ${selectedAccountSection === 'notifications' ? 'text-white' : 'text-purple-700'}`}>
-                          Notifikasi
-                        </span>
-                      </motion.button>
+                        {/* Notifications */}
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setSelectedAccountSection('notifications')}
+                          className={`group relative overflow-hidden rounded-2xl p-4 border-2 transition-all ${
+                            selectedAccountSection === 'notifications'
+                              ? 'bg-gradient-to-br from-purple-500 to-purple-600 border-purple-500 shadow-xl'
+                              : 'bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 hover:border-purple-400'
+                          }`}
+                        >
+                          <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center">
+                            <span className="text-[10px] text-white font-bold">3</span>
+                          </div>
+                          <div className="relative">
+                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
+                              selectedAccountSection === 'notifications' ? 'bg-white/20' : 'bg-gradient-to-br from-purple-500 to-purple-600'
+                            }`}>
+                              <Bell className={`h-7 w-7 ${selectedAccountSection === 'notifications' ? 'text-white' : 'text-white'}`} />
+                            </div>
+                            <span className={`text-sm font-bold block ${selectedAccountSection === 'notifications' ? 'text-white' : 'text-purple-700'}`}>Notifikasi</span>
+                            <p className={`text-xs mt-1 ${selectedAccountSection === 'notifications' ? 'text-white/80' : 'text-purple-500'}`}>Info & promo</p>
+                          </div>
+                        </motion.button>
 
-                      {/* Security */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setSelectedAccountSection('security')}
-                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
-                          selectedAccountSection === 'security'
-                            ? 'bg-gradient-to-br from-red-500 to-orange-500 border-red-500 shadow-xl'
-                            : 'bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 hover:shadow-md'
-                        }`}
-                      >
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
-                          selectedAccountSection === 'security' ? 'bg-white' : 'bg-blue-500'
-                        }`}>
-                          <Lock className={`h-6 w-6 ${selectedAccountSection === 'security' ? 'text-red-500' : 'text-white'}`} />
-                        </div>
-                        <span className={`text-sm font-semibold ${selectedAccountSection === 'security' ? 'text-white' : 'text-blue-700'}`}>
-                          Keamanan
-                        </span>
-                      </motion.button>
+                        {/* Security */}
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setSelectedAccountSection('security')}
+                          className={`group relative overflow-hidden rounded-2xl p-4 border-2 transition-all ${
+                            selectedAccountSection === 'security'
+                              ? 'bg-gradient-to-br from-blue-500 to-blue-600 border-blue-500 shadow-xl'
+                              : 'bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 hover:border-blue-400'
+                          }`}
+                        >
+                          <div className="relative">
+                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
+                              selectedAccountSection === 'security' ? 'bg-white/20' : 'bg-gradient-to-br from-blue-500 to-blue-600'
+                            }`}>
+                              <Lock className={`h-7 w-7 ${selectedAccountSection === 'security' ? 'text-white' : 'text-white'}`} />
+                            </div>
+                            <span className={`text-sm font-bold block ${selectedAccountSection === 'security' ? 'text-white' : 'text-blue-700'}`}>Keamanan</span>
+                            <p className={`text-xs mt-1 ${selectedAccountSection === 'security' ? 'text-white/80' : 'text-blue-500'}`}>Password & akun</p>
+                          </div>
+                        </motion.button>
 
-                      {/* Settings */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setSelectedAccountSection('settings')}
-                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
-                          selectedAccountSection === 'settings'
-                            ? 'bg-gradient-to-br from-red-500 to-orange-500 border-red-500 shadow-xl'
-                            : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200 hover:shadow-md'
-                        }`}
-                      >
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
-                          selectedAccountSection === 'settings' ? 'bg-white' : 'bg-gray-500'
-                        }`}>
-                          <Settings className={`h-6 w-6 ${selectedAccountSection === 'settings' ? 'text-red-500' : 'text-white'}`} />
-                        </div>
-                        <span className={`text-sm font-semibold ${selectedAccountSection === 'settings' ? 'text-white' : 'text-gray-700'}`}>
-                          Pengaturan
-                        </span>
-                      </motion.button>
+                        {/* Settings */}
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setSelectedAccountSection('settings')}
+                          className={`group relative overflow-hidden rounded-2xl p-4 border-2 transition-all ${
+                            selectedAccountSection === 'settings'
+                              ? 'bg-gradient-to-br from-gray-700 to-gray-800 border-gray-700 shadow-xl'
+                              : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200 hover:border-gray-400'
+                          }`}
+                        >
+                          <div className="relative">
+                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow ${
+                              selectedAccountSection === 'settings' ? 'bg-white/20' : 'bg-gradient-to-br from-gray-600 to-gray-700'
+                            }`}>
+                              <Settings className={`h-7 w-7 ${selectedAccountSection === 'settings' ? 'text-white' : 'text-white'}`} />
+                            </div>
+                            <span className={`text-sm font-bold block ${selectedAccountSection === 'settings' ? 'text-white' : 'text-gray-700'}`}>Pengaturan</span>
+                            <p className={`text-xs mt-1 ${selectedAccountSection === 'settings' ? 'text-white/80' : 'text-gray-500'}`}>Preferensi</p>
+                          </div>
+                        </motion.button>
 
-                      {/* Logout */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={handleLogout}
-                        className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-red-50 to-red-100 border border-red-200 hover:shadow-md transition-all"
-                      >
-                        <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shadow-lg">
-                          <LogOut className="h-6 w-6 text-white" />
-                        </div>
-                        <span className="text-sm font-semibold text-red-700">Logout</span>
-                      </motion.button>
-                    </div>
-                  </CardContent>
-                </Card>
+                        {/* Logout */}
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -3 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={handleLogout}
+                          className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-50 to-red-100 p-4 border-2 border-red-200 hover:border-red-400 hover:from-red-100 hover:to-red-200 transition-all"
+                        >
+                          <div className="relative">
+                            <div className="w-14 h-14 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-lg mb-3 group-hover:shadow-xl transition-shadow">
+                              <LogOut className="h-7 w-7 text-white" />
+                            </div>
+                            <span className="text-sm font-bold text-red-700 block">Logout</span>
+                            <p className="text-xs text-red-500 mt-1">Keluar akun</p>
+                          </div>
+                        </motion.button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
 
                 {/* Dynamic Sections */}
                 {selectedAccountSection === 'vouchers' && (
