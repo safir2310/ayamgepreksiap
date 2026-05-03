@@ -3411,42 +3411,6 @@ export default function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* Points Notification - Only shows on Account page */}
-      <AnimatePresence>
-        {currentTab === 'account' && user && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-[72px] left-4 right-4 max-w-md mx-auto z-40"
-          >
-            <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 rounded-2xl shadow-2xl px-5 py-4 border border-white/20">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <Gift className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white/90 text-xs font-medium mb-0.5">Notifikasi</p>
-                    <p className="text-white text-base font-bold">
-                      {(user as any).points || 0} poin tersedia
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setCurrentTab('redeem')}
-                  className="bg-white/20 hover:bg-white/30 text-white border-0 h-8 text-xs font-medium px-3"
-                >
-                  Tukar
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-slate-200 dark:border-slate-700 dark:bg-slate-900/95 shadow-lg z-40">
         <div className="container mx-auto px-1 max-w-md">
