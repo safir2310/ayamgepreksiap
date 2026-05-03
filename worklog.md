@@ -412,3 +412,21 @@ Stage Summary:
 - Database schema updated and synced
 - Point redemption feature now works independently without product linkage
 - Better error handling with clear authentication prompts
+
+---
+Task ID: 4
+Agent: zai-code
+Task: Remove point redemption feature from admin dashboard
+
+Work Log:
+- Removed import of AdminPointRedemption component from AdminDashboard
+- Removed sidebar item with id 'point-redemptions' and label 'Tukar Poin'
+- Removed page rendering section for 'point-redemptions' (lines 724-732)
+- Application compiles successfully
+- Point redemption feature completely removed from admin dashboard
+
+Stage Summary:
+- Successfully removed point redemption management from admin dashboard
+- "Tukar Poin" menu item no longer appears in sidebar
+- Component no longer imported or rendered
+- Application compiles and runs without errors
