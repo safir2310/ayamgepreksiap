@@ -17,13 +17,18 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
     }
 
-    // Check if user is admin
-    const user = await db.user.findUnique({
-      where: { id: decoded.userId },
-    })
+    // Skip database check for admin user (PIN-based login)
+    if (decoded.userId === 'admin' && decoded.role === 'admin') {
+      // Admin is authenticated via PIN, proceed
+    } else {
+      // Check if user is admin in database
+      const user = await db.user.findUnique({
+        where: { id: decoded.userId },
+      })
 
-    if (!user || user.role !== 'admin') {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      if (!user || user.role !== 'admin') {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      }
     }
 
     // Fetch all point redemption options
@@ -56,13 +61,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
     }
 
-    // Check if user is admin
-    const user = await db.user.findUnique({
-      where: { id: decoded.userId },
-    })
+    // Skip database check for admin user (PIN-based login)
+    if (decoded.userId === 'admin' && decoded.role === 'admin') {
+      // Admin is authenticated via PIN, proceed
+    } else {
+      // Check if user is admin in database
+      const user = await db.user.findUnique({
+        where: { id: decoded.userId },
+      })
 
-    if (!user || user.role !== 'admin') {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      if (!user || user.role !== 'admin') {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      }
     }
 
     const { name, description, pointsRequired, productId, productImage, active, order } = await request.json()
@@ -136,13 +146,18 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
     }
 
-    // Check if user is admin
-    const user = await db.user.findUnique({
-      where: { id: decoded.userId },
-    })
+    // Skip database check for admin user (PIN-based login)
+    if (decoded.userId === 'admin' && decoded.role === 'admin') {
+      // Admin is authenticated via PIN, proceed
+    } else {
+      // Check if user is admin in database
+      const user = await db.user.findUnique({
+        where: { id: decoded.userId },
+      })
 
-    if (!user || user.role !== 'admin') {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      if (!user || user.role !== 'admin') {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      }
     }
 
     const { id, name, description, pointsRequired, productId, productImage, active, order } = await request.json()
@@ -231,13 +246,18 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
     }
 
-    // Check if user is admin
-    const user = await db.user.findUnique({
-      where: { id: decoded.userId },
-    })
+    // Skip database check for admin user (PIN-based login)
+    if (decoded.userId === 'admin' && decoded.role === 'admin') {
+      // Admin is authenticated via PIN, proceed
+    } else {
+      // Check if user is admin in database
+      const user = await db.user.findUnique({
+        where: { id: decoded.userId },
+      })
 
-    if (!user || user.role !== 'admin') {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      if (!user || user.role !== 'admin') {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      }
     }
 
     const { searchParams } = new URL(request.url)
