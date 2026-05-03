@@ -2088,47 +2088,47 @@ export default function HomePage() {
                   className="space-y-6"
                 >
                   {/* Premium Profile Header */}
-                  <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+                  <div className="relative overflow-hidden rounded-2xl shadow-xl">
                     {/* Animated Background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-orange-500 to-pink-500 rounded-3xl"></div>
-                    <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] rounded-3xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-orange-500 to-pink-500 rounded-2xl"></div>
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] rounded-2xl"></div>
 
                     {/* Floating Particles */}
                     <motion.div
-                      animate={{ y: [0, -20, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-10 left-10 w-4 h-4 bg-white/20 rounded-full blur-sm"
-                    />
-                    <motion.div
                       animate={{ y: [0, -15, 0] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                      className="absolute top-20 right-20 w-3 h-3 bg-yellow-300/30 rounded-full blur-sm"
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute top-6 left-6 w-3 h-3 bg-white/20 rounded-full blur-sm"
                     />
                     <motion.div
-                      animate={{ y: [0, -25, 0] }}
+                      animate={{ y: [0, -12, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                      className="absolute top-12 right-12 w-2.5 h-2.5 bg-yellow-300/30 rounded-full blur-sm"
+                    />
+                    <motion.div
+                      animate={{ y: [0, -18, 0] }}
                       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                      className="absolute bottom-10 left-1/4 w-2 h-2 bg-white/20 rounded-full blur-sm"
+                      className="absolute bottom-6 left-1/4 w-2 h-2 bg-white/20 rounded-full blur-sm"
                     />
 
-                    <CardContent className="relative p-6 sm:p-8">
-                      <div className="flex flex-col sm:flex-row items-center gap-6">
+                    <CardContent className="relative p-4 sm:p-5">
+                      <div className="flex flex-col sm:flex-row items-center gap-4">
                         {/* Profile Photo with Premium Effects */}
                         <motion.div
                           whileHover={{ scale: 1.05, rotate: 2 }}
                           className="relative"
                         >
-                          <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-400 to-red-500 rounded-full blur-xl opacity-60 animate-pulse"></div>
+                          <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-400 to-red-500 rounded-full blur-lg opacity-60 animate-pulse"></div>
                           <div className="relative">
-                            <div className="w-32 h-32 rounded-full p-1.5 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 shadow-2xl ring-4 ring-white/30">
-                              <Avatar className="w-full h-full border-4 border-white/20 rounded-full">
-                                <AvatarImage src={(user as any).profilePhoto || undefined} className="object-cover rounded-full" />
-                                <AvatarFallback className="text-4xl bg-gradient-to-br from-red-50 to-orange-100 text-red-600 font-bold rounded-full">
+                            <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 shadow-xl ring-3 ring-white/30">
+                              <Avatar className="w-full h-full rounded-full overflow-hidden">
+                                <AvatarImage src={(user as any).profilePhoto || undefined} className="object-cover w-full h-full" />
+                                <AvatarFallback className="text-2xl bg-gradient-to-br from-red-50 to-orange-100 text-red-600 font-bold rounded-full">
                                   {user.name?.charAt(0).toUpperCase() || 'P'}
                                 </AvatarFallback>
                               </Avatar>
                             </div>
                             {/* Status Indicator */}
-                            <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-4 border-white rounded-full shadow-lg">
+                            <div className="absolute bottom-1 right-1 w-4.5 h-4.5 bg-green-500 border-3 border-white rounded-full shadow-md">
                               <div className="w-full h-full bg-green-400 rounded-full animate-ping opacity-75"></div>
                             </div>
                           </div>
@@ -2136,12 +2136,12 @@ export default function HomePage() {
                           <motion.div
                             animate={{ rotate: [-5, 5, -5] }}
                             transition={{ duration: 3, repeat: Infinity }}
-                            className="absolute -top-2 -right-2"
+                            className="absolute -top-1 -right-1"
                           >
-                            <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-                              <Star className="h-7 w-7 text-white" />
+                            <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-md border-3 border-white">
+                              <Star className="h-5 w-5 text-white" />
                             </div>
-                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2.5 py-0.5 rounded-full whitespace-nowrap shadow-md">
+                            <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[8px] px-2 py-0.5 rounded-full whitespace-nowrap shadow-sm">
                               {user.memberLevel || 'Basic'}
                             </div>
                           </motion.div>
@@ -2154,24 +2154,24 @@ export default function HomePage() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
                           >
-                            <h3 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
+                            <h3 className="text-2xl font-bold text-white mb-1.5 drop-shadow-lg">
                               {user.name || 'Pelanggan'}
                             </h3>
-                            <p className="text-white/90 text-sm mb-3">{user.email}</p>
+                            <p className="text-white/90 text-xs mb-2">{user.email}</p>
 
                             {/* Contact Info */}
-                            <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
+                            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                               {user.phone && (
-                                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                  <Phone className="h-4 w-4 text-white" />
-                                  <span className="text-xs text-white font-medium">{user.phone}</span>
+                                <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                                  <Phone className="h-3.5 w-3.5 text-white" />
+                                  <span className="text-[11px] text-white font-medium">{user.phone}</span>
                                 </div>
                               )}
                               {user.address && (
-                                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                  <MapPin className="h-4 w-4 text-white" />
-                                  <span className="text-xs text-white font-medium truncate max-w-[150px]">
-                                    {user.address.length > 30 ? user.address.substring(0, 30) + '...' : user.address}
+                                <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                                  <MapPin className="h-3.5 w-3.5 text-white" />
+                                  <span className="text-[11px] text-white font-medium truncate max-w-[140px]">
+                                    {user.address.length > 25 ? user.address.substring(0, 25) + '...' : user.address}
                                   </span>
                                 </div>
                               )}
