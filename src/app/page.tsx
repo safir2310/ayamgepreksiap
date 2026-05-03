@@ -287,7 +287,7 @@ export default function HomePage() {
   const [resetToken, setResetToken] = useState('')
   const [isVerifying, setIsVerifying] = useState(false)
   const [isResetting, setIsResetting] = useState(false)
-  const [showNotificationBanner, setShowNotificationBanner] = useState(false)
+  const [showNotificationBanner, setShowNotificationBanner] = useState(true)
   const [hasInitialRender, setHasInitialRender] = useState(false)
   const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false)
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false)
@@ -1577,6 +1577,89 @@ export default function HomePage() {
 
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-3 py-4 pb-20 sm:px-4 sm:py-6">
+        {/* Page Header - Dynamic Title Based on Tab */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-center mb-6"
+        >
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+            {currentTab === 'home' && 'Beranda'}
+            {currentTab === 'products' && 'Belanja'}
+            {currentTab === 'orders' && 'Riwayat Pesanan'}
+            {currentTab === 'redeem' && 'Tukar Poin'}
+            {currentTab === 'account' && 'Akun'}
+          </h1>
+        </motion.div>
+
+        {/* Notification Banner - Show on all pages */}
+        <AnimatePresence>
+          {showNotificationBanner && hasNotifications && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="mb-6"
+            >
+              <Card className="border-0 shadow-xl overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Bell className="h-5 w-5 text-white animate-wiggle" />
+                        <span className="text-white font-semibold">Info terbaru untuk Anda</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {pendingOrders > 0 && (
+                          <div
+                            className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full cursor-pointer hover:bg-white/30 transition-colors"
+                            onClick={() => {
+                              setCurrentTab('orders')
+                            }}
+                          >
+                            <FileText className="h-3 w-3" />
+                            <span>{pendingOrders} pesanan pending</span>
+                          </div>
+                        )}
+                        {user && user.points > 0 && (
+                          <div
+                            className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full cursor-pointer hover:bg-white/30 transition-colors"
+                            onClick={() => {
+                              setCurrentTab('account')
+                            }}
+                          >
+                            <Gift className="h-3 w-3" />
+                            <span>{user.points} poin tersedia</span>
+                          </div>
+                        )}
+                        {cartNotification > 0 && (
+                          <div
+                            className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full cursor-pointer hover:bg-white/30 transition-colors"
+                            onClick={() => {
+                              setCurrentTab('products')
+                            }}
+                          >
+                            <ShoppingCart className="h-3 w-3" />
+                            <span>{cartNotification} item di keranjang</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setShowNotificationBanner(false)}
+                      className="flex-shrink-0 p-1 hover:bg-white/20 rounded-full transition-colors"
+                    >
+                      <X className="h-4 w-4 text-white" />
+                    </button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {currentTab === 'home' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             {/* Member Card */}
@@ -1982,7 +2065,6 @@ export default function HomePage() {
 
         {currentTab === 'orders' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">Riwayat Pesanan</h2>
             {!user ? (
               <Card className="p-8 text-center">
                 <FileText className="h-16 w-16 mx-auto mb-4 text-gray-300" />
@@ -3214,7 +3296,6 @@ export default function HomePage() {
 
         {currentTab === 'redeem' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">Tukar Poin</h2>
             {user ? (
               <div className="space-y-4">
                 {/* Points Card */}
@@ -3518,61 +3599,6 @@ export default function HomePage() {
           </ScrollArea>
         </DialogContent>
       </Dialog>
-
-      {/* Notification Banner */}
-      <AnimatePresence>
-        {showNotificationBanner && hasNotifications && (
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-[84px] left-2 right-2 md:left-1/2 md:-translate-x-1/2 md:right-auto md:w-[400px] z-50"
-          >
-            <Card className="bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-2xl border-0">
-              <CardContent className="p-3">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <Bell className="h-4 w-4 animate-pulse" />
-                      <p className="font-semibold text-sm">Notifikasi</p>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-2 text-xs">
-                      {pendingOrders > 0 && (
-                        <div
-                          className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full cursor-pointer hover:bg-white/30 transition-colors"
-                          onClick={() => {
-                            setCurrentTab('orders')
-                          }}
-                        >
-                          <FileText className="h-3 w-3" />
-                          <span>{pendingOrders} pesanan pending</span>
-                        </div>
-                      )}
-                      {user && user.points > 0 && (
-                        <div
-                          className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full cursor-pointer hover:bg-white/30 transition-colors"
-                          onClick={() => {
-                            setCurrentTab('account')
-                          }}
-                        >
-                          <Gift className="h-3 w-3" />
-                          <span>{user.points} poin tersedia</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setShowNotificationBanner(false)}
-                    className="flex-shrink-0 p-1 hover:bg-white/20 rounded-full transition-colors"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-slate-200 dark:border-slate-700 dark:bg-slate-900/95 shadow-lg z-40">
