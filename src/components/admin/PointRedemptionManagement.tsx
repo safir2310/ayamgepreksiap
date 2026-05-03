@@ -77,12 +77,6 @@ export function PointRedemptionManagement() {
   const loadRedemptions = async () => {
     setIsLoading(true)
     try {
-      if (!token) {
-        toast.error('Anda belum login. Silakan login dengan PIN admin terlebih dahulu.')
-        setIsLoading(false)
-        return
-      }
-
       const res = await fetch('/api/admin/point-redemption', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -153,11 +147,6 @@ export function PointRedemptionManagement() {
       return
     }
 
-    if (!token) {
-      toast.error('Anda belum login. Silakan login dengan PIN admin terlebih dahulu.')
-      return
-    }
-
     try {
       const res = await fetch(`/api/admin/point-redemption?id=${id}`, {
         method: 'DELETE',
@@ -180,11 +169,6 @@ export function PointRedemptionManagement() {
   }
 
   const handleToggleActive = async (redemption: PointRedemption) => {
-    if (!token) {
-      toast.error('Anda belum login. Silakan login dengan PIN admin terlebih dahulu.')
-      return
-    }
-
     try {
       const res = await fetch('/api/admin/point-redemption', {
         method: 'PUT',
@@ -212,12 +196,6 @@ export function PointRedemptionManagement() {
   }
 
   const handleSave = async () => {
-    // Validate token
-    if (!token) {
-      toast.error('Anda belum login. Silakan login dengan PIN admin terlebih dahulu.')
-      return
-    }
-
     // Validate form
     if (!formData.name.trim()) {
       toast.error('Nama wajib diisi')
