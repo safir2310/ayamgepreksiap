@@ -4916,129 +4916,169 @@ export default function HomePage() {
       </Dialog>
 
       <Dialog open={isBarcodeModalOpen} onOpenChange={setIsBarcodeModalOpen}>
-        <DialogContent className="sm:max-w-[300px] p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-[360px] p-0 overflow-hidden bg-transparent border-0 shadow-2xl">
+          {/* Premium Member Card Barcode */}
+          <div className="relative overflow-hidden mx-auto" style={{ width: '340px', height: '214px', borderRadius: '20px' }}>
+            {/* Animated Gradient Background - Same as Member Card */}
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-900 via-red-700 to-orange-800"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/30 via-transparent to-red-500/20"></div>
+
+            {/* Premium Gold Border */}
+            <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500"></div>
+
+            {/* Decorative Patterns */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-4 right-4 w-32 h-32 bg-yellow-400 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-4 left-4 w-24 h-24 bg-red-400 rounded-full blur-3xl"></div>
+            </div>
+
+            {/* Animated Shimmer Line */}
+            <motion.div
+              animate={{ x: ['-100%', '200%'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            ></motion.div>
+
+            {/* Premium Particles */}
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute top-6 left-6 w-2 h-2 bg-yellow-400 rounded-full shadow-lg shadow-yellow-400/50"
+            />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+              className="absolute top-12 right-8 w-1.5 h-1.5 bg-orange-400 rounded-full shadow-lg shadow-orange-400/50"
+            />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+              className="absolute bottom-8 left-12 w-2 h-2 bg-red-400 rounded-full shadow-lg shadow-red-400/50"
+            />
+
+            {/* Metallic Accent Lines */}
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+
+            {/* Card Content */}
+            <CardContent className="relative p-5 h-full flex flex-col justify-between">
+              {user ? (
+                <>
+                  {/* Premium Header */}
+                  <div className="flex items-start justify-between">
+                    <div className="relative">
+                      <motion.div
+                        animate={{ rotate: [-2, 2, -2] }}
+                        transition={{ duration: 4, repeat: Infinity }}
+                        className="flex items-center gap-2"
+                      >
+                        <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center shadow-lg">
+                          <QrCode className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-xs tracking-widest text-yellow-300 uppercase">Barcode</h3>
+                          <p className="text-[9px] text-white/60 tracking-wide">MEMBER CARD</p>
+                        </div>
+                      </motion.div>
+                    </div>
+                    <div className="relative">
+                      <div className="relative bg-white/10 backdrop-blur-md rounded-lg px-3 py-1.5 border border-white/20">
+                        <p className="text-white text-[10px] font-mono tracking-wider">{user.id.slice(0, 8).toUpperCase()}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Middle Section: Barcode */}
+                  <div className="relative">
+                    <motion.div
+                      animate={{ scale: [1, 1.02, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-yellow-500/20 to-red-400/20 blur-xl rounded-full"
+                    ></motion.div>
+                    <div className="relative flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm rounded-xl p-3 border border-orange-400/30">
+                      <div className="bg-white rounded-lg p-2 shadow-inner">
+                        <Barcode
+                          value={user.phone || user.id}
+                          width={1.8}
+                          height={55}
+                          displayValue={false}
+                          background="white"
+                          lineColor="#1F2937"
+                          fontSize={0}
+                        />
+                      </div>
+                      <p className="text-xs font-bold text-gray-800 mt-1.5 tracking-widest">{user.phone || user.id}</p>
+                    </div>
+                  </div>
+
+                  {/* Bottom Section: Premium Stats */}
+                  <div className="grid grid-cols-3 gap-2">
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      className="relative bg-gradient-to-br from-yellow-400/20 to-orange-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-yellow-400/30"
+                    >
+                      <motion.div
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                      >
+                        <Star className="h-4 w-4 mx-auto mb-1 text-yellow-400" />
+                      </motion.div>
+                      <div className="text-lg font-bold text-white">{user.points}</div>
+                      <div className="text-[8px] text-yellow-300 font-medium">POIN</div>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      className="relative bg-gradient-to-br from-orange-400/20 to-red-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-orange-400/30"
+                    >
+                      <motion.div
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+                      >
+                        <Gift className="h-4 w-4 mx-auto mb-1 text-orange-400" />
+                      </motion.div>
+                      <div className="text-lg font-bold text-white">{user.stampCount}</div>
+                      <div className="text-[8px] text-orange-300 font-medium">STAMP</div>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      className="relative bg-gradient-to-br from-red-400/20 to-red-600/20 backdrop-blur-sm rounded-xl p-2 text-center border border-red-400/30"
+                    >
+                      <motion.div
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                      >
+                        <Sparkles className="h-4 w-4 mx-auto mb-1 text-red-400" />
+                      </motion.div>
+                      <div className="text-lg font-bold text-white">{user.starCount}</div>
+                      <div className="text-[8px] text-red-300 font-medium">STAR</div>
+                    </motion.div>
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-full text-center">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                    className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full flex items-center justify-center mb-3"
+                  >
+                    <Lock className="h-8 w-8 text-white/40" />
+                  </motion.div>
+                  <p className="text-xs font-medium text-white/80">Login untuk barcode</p>
+                </div>
+              )}
+            </CardContent>
+
+            {/* Holographic Effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent via-white/5 to-transparent pointer-events-none"></div>
+          </div>
+
           {/* Close Button */}
           <button
             onClick={() => setIsBarcodeModalOpen(false)}
-            className="absolute top-2 right-2 z-50 w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md flex items-center justify-center transition-colors border border-white/30"
+            className="absolute -top-3 -right-3 z-50 w-9 h-9 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 flex items-center justify-center transition-all shadow-lg shadow-orange-500/50 border-2 border-white"
           >
-            <X className="h-4 w-4 text-white" />
+            <X className="h-5 w-5 text-white" />
           </button>
-
-          {/* Premium Gradient Background */}
-          <div className="relative bg-gradient-to-br from-red-600 via-orange-500 to-amber-500 p-3">
-            {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-xl"></div>
-            <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-xl"></div>
-
-            {/* Content */}
-            <div className="relative z-10 space-y-3">
-              {/* Header */}
-              <div className="text-center">
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <div className="inline-flex items-center justify-center w-10 h-10 bg-white/20 backdrop-blur-md rounded-lg mb-1.5 shadow-lg">
-                    <CreditCard className="h-5 w-5 text-white" />
-                  </div>
-                  <h2 className="text-base font-bold text-white mb-1 tracking-wide">KARTU MEMBER</h2>
-                  <p className="text-white/80 text-[10px]">Scan barcode</p>
-                </motion.div>
-              </div>
-
-              {user && (
-                <>
-                  {/* Member Info Card */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-white/95 backdrop-blur-xl rounded-lg p-3 shadow-xl border border-white/30"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded-md flex items-center justify-center shadow">
-                        <User className="h-4 w-4 text-white" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-gray-800 text-xs truncate">{user.name || 'Pelanggan'}</h3>
-                        <p className="text-[10px] text-gray-500">{user.memberLevel}</p>
-                      </div>
-                      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wider">
-                        {user.id.slice(0, 6).toUpperCase()}
-                      </div>
-                    </div>
-
-                    {/* Barcode Section */}
-                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-md p-2.5 shadow-inner">
-                      <div className="flex justify-center mb-1.5">
-                        <div className="bg-white p-1.5 rounded-md shadow-sm">
-                          <Barcode
-                            value={user.phone || user.id}
-                            width={2}
-                            height={50}
-                            displayValue={false}
-                            background="white"
-                            lineColor="#1F2937"
-                            fontSize={0}
-                          />
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-sm font-bold text-gray-800 tracking-widest text-[10px]">{user.phone || user.id}</p>
-                        <p className="text-[9px] text-gray-500">ID: {user.id.slice(0, 6).toUpperCase()}</p>
-                      </div>
-                    </div>
-
-                    {/* Stats Row */}
-                    <div className="grid grid-cols-3 gap-1.5 mt-2">
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="bg-gradient-to-br from-red-50 to-orange-50 rounded-md p-1.5 text-center border border-red-100"
-                      >
-                        <div className="text-xs mb-0.5">💳</div>
-                        <div className="text-base font-bold text-red-600">{user.points}</div>
-                        <div className="text-[8px] text-gray-600">Poin</div>
-                      </motion.div>
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.25 }}
-                        className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-md p-1.5 text-center border border-amber-100"
-                      >
-                        <div className="text-xs mb-0.5">🎯</div>
-                        <div className="text-base font-bold text-amber-600">{user.stampCount}</div>
-                        <div className="text-[8px] text-gray-600">Stamp</div>
-                      </motion.div>
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                        className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-md p-1.5 text-center border border-yellow-100"
-                      >
-                        <div className="text-xs mb-0.5">⭐</div>
-                        <div className="text-base font-bold text-yellow-600">{user.starCount}</div>
-                        <div className="text-[8px] text-gray-600">Star</div>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-
-                  {/* Info Banner - Ultra Compact */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35 }}
-                    className="bg-white/20 backdrop-blur-md rounded-md px-2 py-1 text-center border border-white/20"
-                  >
-                    <p className="text-[9px] text-white font-medium leading-tight">Scan untuk poin otomatis</p>
-                  </motion.div>
-                </>
-              )}
-            </div>
-          </div>
         </DialogContent>
       </Dialog>
 
