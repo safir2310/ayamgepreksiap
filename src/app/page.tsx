@@ -4480,73 +4480,126 @@ export default function HomePage() {
       </Dialog>
 
       <Dialog open={isBarcodeModalOpen} onOpenChange={setIsBarcodeModalOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-center text-2xl font-bold bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
-              Barcode Member
-            </DialogTitle>
-          </DialogHeader>
-          {user && (
-            <div className="space-y-6">
-              <Card className="bg-gradient-to-br from-red-50 to-orange-50 border-2 border-orange-200">
-                <CardContent className="p-6">
-                  <div className="text-center mb-4">
-                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                      <User className="h-4 w-4" />
-                      {user.name || 'Pelanggan'}
-                    </div>
-                  </div>
+        <DialogContent className="sm:max-w-[420px] p-0 overflow-hidden">
+          {/* Premium Gradient Background */}
+          <div className="relative bg-gradient-to-br from-red-600 via-orange-500 to-amber-500 min-h-[500px]">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
 
-                  <div className="bg-white rounded-xl p-4 shadow-inner">
-                    <div className="flex justify-center mb-4">
-                      <Barcode
-                        value={user.phone || user.id}
-                        width={3}
-                        height={80}
-                        displayValue={false}
-                        background="white"
-                        lineColor="#1F2937"
-                      />
-                    </div>
-                    <div className="text-center space-y-1">
-                      <p className="text-2xl font-bold text-gray-800 tracking-widest">
-                        {user.phone || user.id}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        ID Member: {user.id.slice(0, 8).toUpperCase()}
-                      </p>
-                    </div>
+            {/* Content */}
+            <div className="relative z-10 p-6 space-y-6">
+              {/* Header */}
+              <div className="text-center">
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl mb-4 shadow-2xl">
+                    <CreditCard className="h-8 w-8 text-white" />
                   </div>
+                  <h2 className="text-3xl font-bold text-white mb-2 tracking-wide">KARTU MEMBER</h2>
+                  <p className="text-white/80 text-sm">Scan barcode untuk poin Anda</p>
+                </motion.div>
+              </div>
 
-                  <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-orange-200">
-                    <div className="text-center">
-                      <div className="text-2xl">💳</div>
-                      <div className="text-sm font-semibold text-gray-800">{user.points}</div>
-                      <div className="text-xs text-gray-500">Poin</div>
+              {user && (
+                <>
+                  {/* Member Info Card */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="bg-white/95 backdrop-blur-xl rounded-2xl p-5 shadow-2xl border border-white/30"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <User className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-bold text-gray-800 text-lg">{user.name || 'Pelanggan'}</h3>
+                        <p className="text-sm text-gray-500">{user.memberLevel} Member</p>
+                      </div>
+                      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold tracking-wider">
+                        {user.id.slice(0, 8).toUpperCase()}
+                      </div>
                     </div>
-                    <div className="w-px h-10 bg-orange-200"></div>
-                    <div className="text-center">
-                      <div className="text-2xl">🎯</div>
-                      <div className="text-sm font-semibold text-gray-800">{user.stampCount}</div>
-                      <div className="text-xs text-gray-500">Stamp</div>
-                    </div>
-                    <div className="w-px h-10 bg-orange-200"></div>
-                    <div className="text-center">
-                      <div className="text-2xl">⭐</div>
-                      <div className="text-sm font-semibold text-gray-800">{user.starCount}</div>
-                      <div className="text-xs text-gray-500">Star</div>
-                    </div>
-                  </div>
 
-                  <div className="mt-4 p-3 bg-orange-100 rounded-lg text-center">
-                    <p className="text-sm font-semibold text-orange-800">
-                      Scan barcode ini saat checkout untuk mendapatkan poin
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+                    {/* Barcode Section */}
+                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 shadow-inner">
+                      <div className="flex justify-center mb-4">
+                        <div className="bg-white p-4 rounded-xl shadow-md">
+                          <Barcode
+                            value={user.phone || user.id}
+                            width={3}
+                            height={90}
+                            displayValue={false}
+                            background="white"
+                            lineColor="#1F2937"
+                            fontSize={0}
+                          />
+                        </div>
+                      </div>
+                      <div className="text-center space-y-1">
+                        <p className="text-2xl font-bold text-gray-800 tracking-widest">{user.phone || user.id}</p>
+                        <p className="text-xs text-gray-500 font-medium">ID: {user.id.slice(0, 8).toUpperCase()}</p>
+                      </div>
+                    </div>
+
+                    {/* Stats Row */}
+                    <div className="grid grid-cols-3 gap-3 mt-4">
+                      <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-3 text-center border-2 border-red-100"
+                      >
+                        <div className="text-lg mb-1">💳</div>
+                        <div className="text-2xl font-bold text-red-600">{user.points}</div>
+                        <div className="text-[10px] text-gray-600 font-medium">Poin</div>
+                      </motion.div>
+                      <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.25 }}
+                        className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-3 text-center border-2 border-amber-100"
+                      >
+                        <div className="text-lg mb-1">🎯</div>
+                        <div className="text-2xl font-bold text-amber-600">{user.stampCount}</div>
+                        <div className="text-[10px] text-gray-600 font-medium">Stamp</div>
+                      </motion.div>
+                      <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-3 text-center border-2 border-yellow-100"
+                      >
+                        <div className="text-lg mb-1">⭐</div>
+                        <div className="text-2xl font-bold text-yellow-600">{user.starCount}</div>
+                        <div className="text-[10px] text-gray-600 font-medium">Star</div>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+
+                  {/* Info Banner */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 }}
+                    className="bg-white/20 backdrop-blur-md rounded-xl p-4 text-center border border-white/20"
+                  >
+                    <div className="flex items-center justify-center gap-2 text-white">
+                      <div className="w-8 h-8 rounded-lg bg-white/30 flex items-center justify-center">
+                        <FileText className="h-4 w-4 text-white" />
+                      </div>
+                      <p className="text-sm font-medium">Scan barcode ini saat checkout untuk mendapatkan poin otomatis</p>
+                    </div>
+                  </motion.div>
+                </>
+              )}
             </div>
-          )}
+          </div>
         </DialogContent>
       </Dialog>
 
