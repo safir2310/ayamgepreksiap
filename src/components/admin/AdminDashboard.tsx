@@ -49,7 +49,7 @@ import { PointVoucherManagement } from '@/components/admin/PointVoucherManagemen
 import { PromoManagement } from '@/components/admin/PromoManagement'
 import { PaymentConfirmation } from '@/components/admin/PaymentConfirmation'
 import { ChatManagement } from '@/components/admin/ChatManagement'
-import { PointRedemptionManagement } from '@/components/admin/PointRedemptionManagement'
+import { AdminPointRedemption } from '@/components/admin/AdminPointRedemption'
 
 interface DashboardStats {
   totalSales: number;
@@ -729,7 +729,7 @@ const AdminDashboard: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <PointRedemptionManagement />
+                <AdminPointRedemption />
               </motion.div>
             )}
 
