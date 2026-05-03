@@ -2080,16 +2080,6 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             {user ? (
               <div className="space-y-6">
-                {/* Page Title - Beranda */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-center py-4"
-                >
-                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Beranda</h1>
-                </motion.div>
-
                 {/* Modern Profile Design 2025 */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
