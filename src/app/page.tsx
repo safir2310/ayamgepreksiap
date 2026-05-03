@@ -44,6 +44,7 @@ import {
   RefreshCw,
   AlertCircle,
   Printer,
+  LayoutDashboard,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -1623,6 +1624,16 @@ export default function HomePage() {
 
             {/* Right Side Buttons */}
             <div className="flex items-center gap-1">
+              {user?.role === 'admin' && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/20 h-10 w-10 sm:h-10 sm:w-10"
+                  onClick={() => setShowAdminDashboard(true)}
+                >
+                  <LayoutDashboard className="h-5 w-5" />
+                </Button>
+              )}
               <Button
                 variant="ghost"
                 size="icon"
