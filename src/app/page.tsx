@@ -2088,23 +2088,23 @@ export default function HomePage() {
                   className="space-y-6"
                 >
                   {/* Premium Profile Header */}
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden rounded-3xl shadow-2xl">
                     {/* Animated Background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-orange-500 to-pink-500"></div>
-                    <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
-                    
+                    <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-orange-500 to-pink-500 rounded-3xl"></div>
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] rounded-3xl"></div>
+
                     {/* Floating Particles */}
-                    <motion.div 
+                    <motion.div
                       animate={{ y: [0, -20, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                       className="absolute top-10 left-10 w-4 h-4 bg-white/20 rounded-full blur-sm"
                     />
-                    <motion.div 
+                    <motion.div
                       animate={{ y: [0, -15, 0] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                       className="absolute top-20 right-20 w-3 h-3 bg-yellow-300/30 rounded-full blur-sm"
                     />
-                    <motion.div 
+                    <motion.div
                       animate={{ y: [0, -25, 0] }}
                       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                       className="absolute bottom-10 left-1/4 w-2 h-2 bg-white/20 rounded-full blur-sm"
@@ -2119,16 +2119,16 @@ export default function HomePage() {
                         >
                           <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-400 to-red-500 rounded-full blur-xl opacity-60 animate-pulse"></div>
                           <div className="relative">
-                            <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 shadow-2xl">
-                              <Avatar className="w-full h-full border-4 border-white/20">
-                                <AvatarImage src={(user as any).profilePhoto || undefined} className="object-cover" />
-                                <AvatarFallback className="text-4xl bg-gradient-to-br from-red-50 to-orange-100 text-red-600 font-bold">
+                            <div className="w-32 h-32 rounded-full p-1.5 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 shadow-2xl ring-4 ring-white/30">
+                              <Avatar className="w-full h-full border-4 border-white/20 rounded-full">
+                                <AvatarImage src={(user as any).profilePhoto || undefined} className="object-cover rounded-full" />
+                                <AvatarFallback className="text-4xl bg-gradient-to-br from-red-50 to-orange-100 text-red-600 font-bold rounded-full">
                                   {user.name?.charAt(0).toUpperCase() || 'P'}
                                 </AvatarFallback>
                               </Avatar>
                             </div>
                             {/* Status Indicator */}
-                            <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-3 border-white rounded-full shadow-lg">
+                            <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-4 border-white rounded-full shadow-lg">
                               <div className="w-full h-full bg-green-400 rounded-full animate-ping opacity-75"></div>
                             </div>
                           </div>
@@ -2141,8 +2141,8 @@ export default function HomePage() {
                             <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
                               <Star className="h-7 w-7 text-white" />
                             </div>
-                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap">
-                              {user.memberLevel}
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2.5 py-0.5 rounded-full whitespace-nowrap shadow-md">
+                              {user.memberLevel || 'Basic'}
                             </div>
                           </motion.div>
                         </motion.div>
@@ -2158,7 +2158,7 @@ export default function HomePage() {
                               {user.name || 'Pelanggan'}
                             </h3>
                             <p className="text-white/90 text-sm mb-3">{user.email}</p>
-                            
+
                             {/* Contact Info */}
                             <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
                               {user.phone && (
@@ -2183,23 +2183,23 @@ export default function HomePage() {
                   </div>
 
                   {/* Achievement Progress */}
-                  <Card className="border-none shadow-xl overflow-hidden">
-                    <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-6">
+                  <Card className="border-none shadow-xl overflow-hidden rounded-2xl">
+                    <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-6 rounded-2xl">
                       <div className="flex items-center justify-between mb-4">
                         <h4 className="text-white font-bold text-lg">Level Progress</h4>
-                        <Badge className="bg-yellow-400 text-yellow-900 font-bold">Gold Member</Badge>
+                        <Badge className="bg-yellow-400 text-yellow-900 font-bold rounded-full">Gold Member</Badge>
                       </div>
                       <div className="space-y-3">
                         {/* XP Progress Bar */}
                         <div>
                           <div className="flex justify-between text-xs text-gray-300 mb-1">
                             <span>Experience Points</span>
-                            <span className="text-yellow-400 font-bold">2,450 / 3,000 XP</span>
+                            <span className="text-yellow-400 font-bold">{user.points || 0} / 3,000 XP</span>
                           </div>
                           <div className="h-3 bg-gray-700 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
-                              animate={{ width: '82%' }}
+                              animate={{ width: `${Math.min((user.points || 0) / 3000 * 100, 100)}%` }}
                               transition={{ duration: 1.5, ease: "easeOut" }}
                               className="h-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 rounded-full"
                             />
@@ -2220,7 +2220,7 @@ export default function HomePage() {
                             </div>
                           </div>
                           <div className="flex-1">
-                            <p className="text-xs text-gray-300">550 XP lagi menuju <span className="text-purple-400 font-bold">Platinum Member</span></p>
+                            <p className="text-xs text-gray-300">{Math.max(0, 3000 - (user.points || 0))} XP lagi menuju <span className="text-purple-400 font-bold">Platinum Member</span></p>
                           </div>
                           <ArrowRight className="h-5 w-5 text-gray-400" />
                         </div>
@@ -2235,8 +2235,8 @@ export default function HomePage() {
                       whileHover={{ y: -8, scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Card className="relative overflow-hidden border-0 shadow-lg">
-                        <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-red-600"></div>
+                      <Card className="relative overflow-hidden border-0 shadow-lg rounded-2xl">
+                        <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl"></div>
                         <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                         <CardContent className="relative p-4 text-center text-white">
                           <motion.div
@@ -2258,8 +2258,8 @@ export default function HomePage() {
                       whileTap={{ scale: 0.98 }}
                       transition={{ delay: 0.1 }}
                     >
-                      <Card className="relative overflow-hidden border-0 shadow-lg">
-                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600"></div>
+                      <Card className="relative overflow-hidden border-0 shadow-lg rounded-2xl">
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl"></div>
                         <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                         <CardContent className="relative p-4 text-center text-white">
                           <motion.div
@@ -2281,8 +2281,8 @@ export default function HomePage() {
                       whileTap={{ scale: 0.98 }}
                       transition={{ delay: 0.2 }}
                     >
-                      <Card className="relative overflow-hidden border-0 shadow-lg">
-                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-amber-500"></div>
+                      <Card className="relative overflow-hidden border-0 shadow-lg rounded-2xl">
+                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-2xl"></div>
                         <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                         <CardContent className="relative p-4 text-center text-white">
                           <motion.div
@@ -2300,8 +2300,8 @@ export default function HomePage() {
                   </div>
 
                   {/* Quick Actions Menu */}
-                  <Card className="border-none shadow-xl overflow-hidden">
-                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white pb-4">
+                  <Card className="border-none shadow-xl overflow-hidden rounded-2xl">
+                    <CardHeader className="bg-gradient-to-r from-gray-50 to-white pb-4 rounded-t-2xl">
                       <CardTitle className="flex items-center gap-3">
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl blur-lg opacity-40 animate-pulse"></div>
