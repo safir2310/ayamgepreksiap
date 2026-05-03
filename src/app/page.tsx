@@ -1579,87 +1579,215 @@ export default function HomePage() {
       <main className="flex-1 container mx-auto px-3 py-4 pb-20 sm:px-4 sm:py-6">
         {currentTab === 'home' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            {/* Member Card */}
+            {/* Premium Member Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="mb-6 flex justify-center"
             >
-              <Card className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 border-0 shadow-xl overflow-hidden relative" style={{ width: '340px', height: '214px', borderRadius: '12px' }}>
-                {/* Decorative pattern */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+              <motion.div
+                whileHover={{ scale: 1.02, rotateY: 2 }}
+                transition={{ duration: 0.3 }}
+                className="relative w-full max-w-sm"
+              >
+                {/* Premium Card with Metallic Effect */}
+                <div className="relative overflow-hidden" style={{ width: '340px', height: '214px', borderRadius: '20px' }}>
+                  {/* Animated Gradient Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/20 via-transparent to-pink-500/20"></div>
 
-                {/* Floating Barcode Widget - Adjusted position */}
-                {user && (
+                  {/* Premium Gold Border */}
+                  <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-yellow-400 via-amber-300 to-yellow-500"></div>
+
+                  {/* Decorative Patterns */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-4 right-4 w-32 h-32 bg-amber-400 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-4 left-4 w-24 h-24 bg-pink-400 rounded-full blur-3xl"></div>
+                  </div>
+
+                  {/* Animated Shimmer Line */}
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="absolute bottom-2 right-2 z-10"
-                  >
-                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                      <Button
-                        onClick={() => setIsBarcodeModalOpen(true)}
-                        className="h-9 w-9 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-orange-300"
-                      >
+                    animate={{ x: ['-100%', '200%'] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                  ></motion.div>
+
+                  {/* Premium Particles */}
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute top-6 left-6 w-2 h-2 bg-amber-400 rounded-full shadow-lg shadow-amber-400/50"
+                  />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    className="absolute top-12 right-8 w-1.5 h-1.5 bg-pink-400 rounded-full shadow-lg shadow-pink-400/50"
+                  />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                    className="absolute bottom-8 left-12 w-2 h-2 bg-white rounded-full shadow-lg shadow-white/50"
+                  />
+
+                  {/* Metallic Accent Lines */}
+                  <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+
+                  {/* Card Content */}
+                  <CardContent className="relative p-5 h-full flex flex-col justify-between">
+                    {user ? (
+                      <>
+                        {/* Premium Header */}
+                        <div className="flex items-start justify-between">
+                          <div className="relative">
+                            <motion.div
+                              animate={{ rotate: [-2, 2, -2] }}
+                              transition={{ duration: 4, repeat: Infinity }}
+                              className="flex items-center gap-2"
+                            >
+                              <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg">
+                                <Crown className="h-4 w-4 text-slate-900" />
+                              </div>
+                              <div>
+                                <h3 className="font-bold text-xs tracking-widest text-amber-300 uppercase">Premium</h3>
+                                <p className="text-[9px] text-white/60 tracking-wide">{user.memberLevel} MEMBER</p>
+                              </div>
+                            </motion.div>
+                          </div>
+                          <div className="relative">
+                            <motion.div
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                              className="absolute inset-0 bg-gradient-to-r from-amber-400/30 via-pink-500/30 to-amber-400/30 rounded-lg blur-sm"
+                            ></motion.div>
+                            <div className="relative bg-white/10 backdrop-blur-md rounded-lg px-3 py-1.5 border border-white/20">
+                              <p className="text-white text-[10px] font-mono tracking-wider">{user.id.slice(0, 8).toUpperCase()}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Middle Section: User Info with Premium Glow */}
+                        <div className="relative">
+                          <motion.div
+                            animate={{ scale: [1, 1.02, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="absolute inset-0 bg-gradient-to-r from-amber-400/20 via-pink-500/20 to-amber-400/20 blur-xl rounded-full"
+                          ></motion.div>
+                          <div className="relative flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-xl p-2.5 border border-white/10">
+                            <motion.div
+                              animate={{ rotate: [0, 5, -5, 0] }}
+                              transition={{ duration: 3, repeat: Infinity }}
+                              className="w-10 h-10 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl flex items-center justify-center shadow-lg ring-2 ring-amber-400/50"
+                            >
+                              <User className="h-5 w-5 text-slate-900" />
+                            </motion.div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-bold text-white truncate">{user.name || 'Pelanggan'}</p>
+                              <p className="text-[9px] text-white/60">Exclusive Member</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Bottom Section: Premium Stats */}
+                        <div className="grid grid-cols-3 gap-2">
+                          <motion.div
+                            whileHover={{ y: -2 }}
+                            className="relative bg-gradient-to-br from-amber-400/20 to-yellow-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-amber-400/30"
+                          >
+                            <motion.div
+                              animate={{ y: [0, -3, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                            >
+                              <Star className="h-4 w-4 mx-auto mb-1 text-amber-400" />
+                            </motion.div>
+                            <div className="text-lg font-bold text-white">{user.points}</div>
+                            <div className="text-[8px] text-amber-300 font-medium">POIN</div>
+                          </motion.div>
+                          <motion.div
+                            whileHover={{ y: -2 }}
+                            className="relative bg-gradient-to-br from-pink-400/20 to-rose-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-pink-400/30"
+                          >
+                            <motion.div
+                              animate={{ y: [0, -3, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+                            >
+                              <Gift className="h-4 w-4 mx-auto mb-1 text-pink-400" />
+                            </motion.div>
+                            <div className="text-lg font-bold text-white">{user.stampCount}</div>
+                            <div className="text-[8px] text-pink-300 font-medium">STAMP</div>
+                          </motion.div>
+                          <motion.div
+                            whileHover={{ y: -2 }}
+                            className="relative bg-gradient-to-br from-purple-400/20 to-violet-500/20 backdrop-blur-sm rounded-xl p-2 text-center border border-purple-400/30"
+                          >
+                            <motion.div
+                              animate={{ y: [0, -3, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                            >
+                              <Sparkles className="h-4 w-4 mx-auto mb-1 text-purple-400" />
+                            </motion.div>
+                            <div className="text-lg font-bold text-white">{user.starCount}</div>
+                            <div className="text-[8px] text-purple-300 font-medium">STAR</div>
+                          </motion.div>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center h-full text-center">
                         <motion.div
-                          initial={{ rotate: 90, opacity: 0 }}
-                          animate={{ rotate: 0, opacity: 1 }}
-                          exit={{ rotate: -90, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                          className="w-16 h-16 bg-gradient-to-br from-amber-400/20 to-pink-500/20 rounded-full flex items-center justify-center mb-3"
                         >
-                          <QrCode className="h-4 w-4 text-red-600" />
+                          <Lock className="h-8 w-8 text-white/40" />
                         </motion.div>
-                      </Button>
+                        <p className="text-xs font-medium text-white/80">Login untuk kartu premium</p>
+                      </div>
+                    )}
+                  </CardContent>
+
+                  {/* Premium QR Button */}
+                  {user && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="absolute bottom-4 right-4 z-10"
+                    >
+                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                        <Button
+                          onClick={() => setIsBarcodeModalOpen(true)}
+                          className="h-10 w-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 shadow-lg shadow-amber-500/50 hover:shadow-amber-500/80 border-2 border-white"
+                        >
+                          <motion.div
+                            animate={{ rotate: [0, 360] }}
+                            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                          >
+                            <QrCode className="h-5 w-5 text-slate-900" />
+                          </motion.div>
+                        </Button>
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                )}
-
-                <CardContent className="p-4 relative h-full flex flex-col justify-between" style={{ paddingTop: '12px', paddingBottom: '12px', paddingLeft: '16px', paddingRight: '16px' }}>
-                  {user ? (
-                    <>
-                      {/* Top row: Logo and ID */}
-                      <div className="flex items-start justify-between">
-                        <div className="text-white">
-                          <h3 className="font-bold text-sm tracking-wide">MEMBER CARD</h3>
-                          <p className="text-[10px] opacity-80">{user.memberLevel}</p>
-                        </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1">
-                          <p className="text-white text-[10px] font-mono">{user.id.slice(0, 8).toUpperCase()}</p>
-                        </div>
-                      </div>
-
-                      {/* Middle row: User info */}
-                      <div className="text-white">
-                        <div className="flex items-center gap-1.5 mb-1">
-                          <User className="h-3 w-3" />
-                          <p className="text-xs font-semibold truncate max-w-[180px]">{user.name || 'Pelanggan'}</p>
-                        </div>
-                      </div>
-
-                      {/* Bottom row: Stats */}
-                      <div className="grid grid-cols-3 gap-2">
-                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1.5 text-center">
-                          <div className="text-[10px] text-white/80">Poin</div>
-                          <div className="text-white font-bold text-sm">{user.points}</div>
-                        </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1.5 text-center">
-                          <div className="text-[10px] text-white/80">Stamp</div>
-                          <div className="text-white font-bold text-sm">{user.stampCount}</div>
-                        </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded px-2 py-1.5 text-center">
-                          <div className="text-[10px] text-white/80">Star</div>
-                          <div className="text-white font-bold text-sm">{user.starCount}</div>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="text-white text-center py-4">
-                      <p className="text-sm font-medium">Login untuk melihat kartu member</p>
-                    </div>
                   )}
-                </CardContent>
-              </Card>
+
+                  {/* Holographic Effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent via-white/5 to-transparent pointer-events-none"></div>
+                </div>
+
+                {/* Premium Badge */}
+                <motion.div
+                  animate={{ rotate: [-5, 5, -5] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute -top-2 -right-2 z-20"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/50 border-2 border-white">
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <Crown className="h-6 w-6 text-slate-900" />
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
 
             {/* Promo Banner */}
