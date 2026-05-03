@@ -280,7 +280,7 @@ export default function HomePage() {
   const [resetToken, setResetToken] = useState('')
   const [isVerifying, setIsVerifying] = useState(false)
   const [isResetting, setIsResetting] = useState(false)
-  const [showNotificationBanner, setShowNotificationBanner] = useState(true)
+  const [showNotificationBanner, setShowNotificationBanner] = useState(false)
   const [hasInitialRender, setHasInitialRender] = useState(false)
   const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false)
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false)
