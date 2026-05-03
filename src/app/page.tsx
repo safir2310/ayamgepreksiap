@@ -1474,13 +1474,13 @@ export default function HomePage() {
                   <circle cx="58" cy="30" r="1.5" fill="#F97316" opacity="0.5" />
                 </svg>
               </div>
-              <div>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
                 <h1 className="text-[11px] sm:text-xs font-bold text-white tracking-wide leading-tight">AYAM GEPREK SAMBAL IJO</h1>
                 <button
                   onClick={() => setIsAddressModalOpen(true)}
-                  className="flex items-center gap-1.5 text-white/90 text-[10px] sm:text-[10px] hover:text-white transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 text-white/90 text-[10px] sm:text-[10px] hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  <MapPin className="h-2.5 w-2.5 sm:h-2.5 sm:w-2.5" />
+                  <MapPin className="h-2.5 w-2.5 sm:h-2.5 sm:w-2.5 flex-shrink-0" />
                   <span className="truncate max-w-[100px] sm:max-w-[150px]">Jl. Medan - Banda Aceh, Simpang Camat, Gampong Tijue, 24151</span>
                 </button>
               </div>
