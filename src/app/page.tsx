@@ -45,6 +45,10 @@ import {
   AlertCircle,
   Printer,
   LayoutDashboard,
+  ShoppingBag,
+  UtensilsCrossed,
+  Coffee,
+  Cookie,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -199,12 +203,12 @@ const mockProducts = [
 ]
 
 const categories = [
-  { id: 'all', name: 'Semua', icon: '🛒' },
-  { id: 'makanan', name: 'Makanan', icon: '🍽️' },
-  { id: 'minuman', name: 'Minuman', icon: '🥤' },
-  { id: 'snack', name: 'Snack', icon: '🍿' },
-  { id: 'bumbu', name: 'Bumbu', icon: '🌶️' },
-  { id: 'kebutuhan-rumah', name: 'Kebutuhan Rumah', icon: '🏠' },
+  { id: 'all', name: 'Semua', icon: 'shopping-bag', color: 'from-gray-500 to-gray-600', emoji: '🛒' },
+  { id: 'makanan', name: 'Makanan', icon: 'utensils-crossed', color: 'from-orange-500 to-red-600', emoji: '🍽️' },
+  { id: 'minuman', name: 'Minuman', icon: 'coffee', color: 'from-amber-500 to-yellow-500', emoji: '🥤' },
+  { id: 'snack', name: 'Snack', icon: 'cookie', color: 'from-yellow-500 to-orange-500', emoji: '🍿' },
+  { id: 'bumbu', name: 'Bumbu', icon: 'flame', color: 'from-red-600 to-red-700', emoji: '🌶️' },
+  { id: 'kebutuhan-rumah', name: 'Kebutuhan Rumah', icon: 'home', color: 'from-emerald-500 to-teal-600', emoji: '🏠' },
 ]
 
 const mockOrders = [
@@ -1679,22 +1683,48 @@ export default function HomePage() {
             <div className="bg-gradient-to-br from-red-50 via-orange-50 to-white shadow-sm mb-6">
               <ScrollArea className="w-full">
                 <div className="flex gap-3 py-3 px-3">
-                  {categories.map((category) => (
-                    <motion.button
-                      key={category.id}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setSelectedCategory(category.id)}
-                      className={`flex flex-col items-center gap-2 p-2 sm:p-3 rounded-xl min-w-[65px] sm:min-w-[70px] transition-all ${
-                        selectedCategory === category.id
-                          ? 'bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-lg'
-                          : 'bg-white text-gray-700 shadow hover:shadow-md'
-                      }`}
-                    >
-                      <span className="text-xl sm:text-2xl">{category.icon}</span>
-                      <span className="text-[10px] sm:text-xs font-medium">{category.name}</span>
-                    </motion.button>
-                  ))}
+                  {categories.map((category) => {
+                    const getCategoryIcon = () => {
+                      const iconSize = selectedCategory === category.id ? 20 : 18
+                      switch (category.icon) {
+                        case 'shopping-bag': return <ShoppingBag size={iconSize} />
+                        case 'utensils-crossed': return <UtensilsCrossed size={iconSize} />
+                        case 'coffee': return <Coffee size={iconSize} />
+                        case 'cookie': return <Cookie size={iconSize} />
+                        case 'flame': return <Flame size={iconSize} />
+                        case 'home': return <Home size={iconSize} />
+                        default: return <ShoppingBag size={iconSize} />
+                      }
+                    }
+
+                    return (
+                      <motion.button
+                        key={category.id}
+                        whileHover={{ scale: 1.08 }}
+                        whileTap={{ scale: 0.92 }}
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`flex flex-col items-center gap-2 p-3 sm:p-3.5 rounded-2xl min-w-[75px] sm:min-w-[80px] transition-all relative overflow-hidden group ${
+                          selectedCategory === category.id
+                            ? `bg-gradient-to-br ${category.color} text-white shadow-xl ring-2 ring-offset-2 ring-white`
+                            : 'bg-white text-gray-700 shadow-md hover:shadow-xl hover:ring-2 hover:ring-offset-1 hover:ring-red-200'
+                        }`}
+                      >
+                        {/* Icon Container */}
+                        <div className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center transition-all ${
+                          selectedCategory === category.id
+                            ? 'bg-white/20'
+                            : `bg-gradient-to-br ${category.color} text-white group-hover:scale-110`
+                        }`}>
+                          {getCategoryIcon()}
+                        </div>
+                        <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">{category.name}</span>
+                        {/* Shine Effect */}
+                        {selectedCategory === category.id && (
+                          <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer" />
+                        )}
+                      </motion.button>
+                    )
+                  })}
                 </div>
               </ScrollArea>
             </div>
@@ -1792,22 +1822,48 @@ export default function HomePage() {
             <div className="bg-gradient-to-br from-red-50 via-orange-50 to-white shadow-sm mb-6">
               <ScrollArea className="w-full">
                 <div className="flex gap-3 py-3 px-3">
-                  {categories.map((category) => (
-                    <motion.button
-                      key={category.id}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setSelectedCategory(category.id)}
-                      className={`flex flex-col items-center gap-2 p-2 sm:p-3 rounded-xl min-w-[65px] sm:min-w-[70px] transition-all ${
-                        selectedCategory === category.id
-                          ? 'bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-lg'
-                          : 'bg-white text-gray-700 shadow hover:shadow-md'
-                      }`}
-                    >
-                      <span className="text-xl sm:text-2xl">{category.icon}</span>
-                      <span className="text-[10px] sm:text-xs font-medium">{category.name}</span>
-                    </motion.button>
-                  ))}
+                  {categories.map((category) => {
+                    const getCategoryIcon = () => {
+                      const iconSize = selectedCategory === category.id ? 20 : 18
+                      switch (category.icon) {
+                        case 'shopping-bag': return <ShoppingBag size={iconSize} />
+                        case 'utensils-crossed': return <UtensilsCrossed size={iconSize} />
+                        case 'coffee': return <Coffee size={iconSize} />
+                        case 'cookie': return <Cookie size={iconSize} />
+                        case 'flame': return <Flame size={iconSize} />
+                        case 'home': return <Home size={iconSize} />
+                        default: return <ShoppingBag size={iconSize} />
+                      }
+                    }
+
+                    return (
+                      <motion.button
+                        key={category.id}
+                        whileHover={{ scale: 1.08 }}
+                        whileTap={{ scale: 0.92 }}
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`flex flex-col items-center gap-2 p-3 sm:p-3.5 rounded-2xl min-w-[75px] sm:min-w-[80px] transition-all relative overflow-hidden group ${
+                          selectedCategory === category.id
+                            ? `bg-gradient-to-br ${category.color} text-white shadow-xl ring-2 ring-offset-2 ring-white`
+                            : 'bg-white text-gray-700 shadow-md hover:shadow-xl hover:ring-2 hover:ring-offset-1 hover:ring-red-200'
+                        }`}
+                      >
+                        {/* Icon Container */}
+                        <div className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center transition-all ${
+                          selectedCategory === category.id
+                            ? 'bg-white/20'
+                            : `bg-gradient-to-br ${category.color} text-white group-hover:scale-110`
+                        }`}>
+                          {getCategoryIcon()}
+                        </div>
+                        <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">{category.name}</span>
+                        {/* Shine Effect */}
+                        {selectedCategory === category.id && (
+                          <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer" />
+                        )}
+                      </motion.button>
+                    )
+                  })}
                 </div>
               </ScrollArea>
             </div>
