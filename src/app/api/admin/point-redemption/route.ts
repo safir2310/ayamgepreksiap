@@ -75,12 +75,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const { name, description, pointsRequired, productId, productImage, active, order } = await request.json()
+    const { name, description, pointsRequired, active, order } = await request.json()
 
     // Validate required fields
-    if (!name || !description || !pointsRequired || !productId) {
+    if (!name || !description || !pointsRequired) {
       return NextResponse.json(
-        { error: 'Semua field wajib diisi' },
+        { error: 'Nama, deskripsi, dan poin wajib diisi' },
         { status: 400 }
       )
     }
@@ -93,26 +93,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if product exists
-    const product = await db.product.findUnique({
-      where: { id: productId },
-    })
-
-    if (!product) {
-      return NextResponse.json(
-        { error: 'Produk tidak ditemukan' },
-        { status: 404 }
-      )
-    }
-
     // Create point redemption option
     const redemption = await db.pointRedemption.create({
       data: {
         name,
         description,
         pointsRequired,
-        productId,
-        productImage: productImage || product.image || null,
         active: active !== undefined ? active : true,
         order: order || 0,
       },
@@ -160,7 +146,7 @@ export async function PUT(request: NextRequest) {
       }
     }
 
-    const { id, name, description, pointsRequired, productId, productImage, active, order } = await request.json()
+    const { id, name, description, pointsRequired, active, order } = await request.json()
 
     // Validate required fields
     if (!id) {
@@ -190,20 +176,6 @@ export async function PUT(request: NextRequest) {
       )
     }
 
-    // Check if product exists (if productId is being changed)
-    if (productId && productId !== existingRedemption.productId) {
-      const product = await db.product.findUnique({
-        where: { id: productId },
-      })
-
-      if (!product) {
-        return NextResponse.json(
-          { error: 'Produk tidak ditemukan' },
-          { status: 404 }
-        )
-      }
-    }
-
     // Update point redemption option
     const updatedRedemption = await db.pointRedemption.update({
       where: { id },
@@ -211,8 +183,6 @@ export async function PUT(request: NextRequest) {
         ...(name !== undefined && { name }),
         ...(description !== undefined && { description }),
         ...(pointsRequired !== undefined && { pointsRequired }),
-        ...(productId !== undefined && { productId }),
-        ...(productImage !== undefined && { productImage }),
         ...(active !== undefined && { active }),
         ...(order !== undefined && { order }),
       },

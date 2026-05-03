@@ -205,8 +205,6 @@ model PointRedemption {
   name            String
   description     String
   pointsRequired  Int
-  productId       String
-  productImage    String?
   active          Boolean  @default(true)
   order           Int      @default(0)
   createdAt       DateTime @default(now())

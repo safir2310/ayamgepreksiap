@@ -12,6 +12,7 @@ import {
   X,
   Star,
   Tag,
+  AlertCircle,
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -38,7 +39,7 @@ export function AdminPointRedemption() {
   const [showDialog, setShowDialog] = useState(false)
   const [editingRedemption, setEditingRedemption] = useState<PointRedemption | null>(null)
 
-  const { token } = useStore()
+  const { token, user } = useStore()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -53,6 +54,11 @@ export function AdminPointRedemption() {
   }, [])
 
   const loadRedemptions = async () => {
+    if (!token) {
+      toast.error('Anda belum login. Silakan login terlebih dahulu.')
+      return
+    }
+
     setIsLoading(true)
     try {
       const res = await fetch('/api/admin/point-redemption', {
@@ -105,6 +111,11 @@ export function AdminPointRedemption() {
       return
     }
 
+    if (!token) {
+      toast.error('Anda belum login. Silakan login terlebih dahulu.')
+      return
+    }
+
     try {
       const res = await fetch(`/api/admin/point-redemption?id=${id}`, {
         method: 'DELETE',
@@ -127,6 +138,11 @@ export function AdminPointRedemption() {
   }
 
   const handleToggleActive = async (redemption: PointRedemption) => {
+    if (!token) {
+      toast.error('Anda belum login. Silakan login terlebih dahulu.')
+      return
+    }
+
     try {
       const res = await fetch('/api/admin/point-redemption', {
         method: 'PUT',
@@ -154,6 +170,11 @@ export function AdminPointRedemption() {
   }
 
   const handleSave = async () => {
+    if (!token) {
+      toast.error('Anda belum login. Silakan login terlebih dahulu.')
+      return
+    }
+
     if (!formData.name.trim()) {
       toast.error('Nama wajib diisi')
       return
