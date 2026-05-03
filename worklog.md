@@ -481,3 +481,55 @@ Stage Summary:
 - Smooth staggered animations
 - Enhanced visual hierarchy and readability
 - Application compiles and runs successfully
+---
+Task ID: 6
+Agent: zai-code
+Task: Fix point redemption creation and make popup smaller
+
+Work Log:
+- Made redeem success popup smaller by:
+  * Changed DialogContent size from sm:max-w-md to sm:max-w-xs
+  * Reduced padding from default to p-4
+  * Reduced header text from text-xl to text-base
+  * Changed product info section from p-6 to p-3
+  * Reduced product icon from w-20 h-20 to w-14 h-14
+  * Changed product name from text-lg to text-sm
+  * Changed label from "text-xs" to "text-[10px]"
+  * Reduced voucher code section padding from p-4 to p-3
+  * Changed voucher code from text-2xl to text-lg
+  * Removed one info item (3 instead of 4)
+  * Reduced info section padding from p-4 to p-3
+  * Changed button height from default to h-9
+  * Changed button text from "Salin Kode Voucher" to "Salin Kode"
+
+- Created new API routes for PointRedemption management:
+  * /api/admin/point-redemptions/route.ts (GET for list, POST for create)
+  * /api/admin/point-redemptions/[id]/route.ts (PUT for update, DELETE for delete)
+  
+- Created PointRedemptionManagement component for admin dashboard:
+  * Full CRUD operations for point redemption options
+  * Form fields: name, description, pointsRequired, productId (optional), order, active
+  * Search and filter functionality
+  * Statistics cards (Total, Active, Non-Active)
+  * Toggle active status with button
+  * Edit and delete buttons
+  * Product dropdown for linking to existing products
+
+- Updated AdminDashboard:
+  * Changed import from PointVoucherManagement to PointRedemptionManagement
+  * Added back PointVoucherManagement for viewing issued vouchers
+  * Updated sidebar label from "Voucher Poin" to "Tukar Poin"
+  * Added new sidebar item "Voucher Terbit" for viewing issued vouchers
+  * Separate pages for:
+    - "Tukar Poin" - manage redemption options (what users can redeem)
+    - "Voucher Terbit" - view issued vouchers (what users have redeemed)
+
+- Regenerated Prisma Client after fixing database schema
+
+Stage Summary:
+- Successfully made redeem popup smaller and more compact
+- Fixed point redemption creation by creating proper API routes and admin component
+- Admin can now create, edit, delete, and toggle active status for redemption options
+- Admin can link redemption options to products or create custom rewards
+- Separate management for redemption options vs issued vouchers
+- Point redemption feature now properly synced between admin and user pages
